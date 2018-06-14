@@ -7,6 +7,7 @@ export class UserShop {
         public customer_group_id?: string,
         public shop_address?: string,
         public shop_phone?: string,
+        public shop_photo?: any,
         public shop_date_added?: string
     ) {}
 }

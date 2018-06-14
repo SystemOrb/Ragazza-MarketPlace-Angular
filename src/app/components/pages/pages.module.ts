@@ -24,6 +24,7 @@ import { SellersComponent } from './sellers/sellers.component';
 import { BalanceComponent } from './balance/balance.component';
 import { SharedModule } from '../shared/shared.module';
 import { InvoiceComponent } from './admin/orders/invoice.component';
+import { ImagesPipe } from '../../pipes/images.pipe';
 
 
 
@@ -55,7 +56,10 @@ import { InvoiceComponent } from './admin/orders/invoice.component';
       NotFoundComponent,
       SellersComponent,
       BalanceComponent,
-      InvoiceComponent
+      InvoiceComponent,
+      ImagesPipe
+    ],
+    providers: [
     ]
   })
 export class PagesModule { }

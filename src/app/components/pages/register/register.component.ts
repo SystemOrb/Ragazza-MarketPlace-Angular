@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
       this.form.controls['shop_address'].value,
       this.form.controls['shop_phone'].value
     );
-    this._user.registerNewUser(newUserShop);
+    this._user.registerNewUser(newUserShop).subscribe();
   }
 
 }

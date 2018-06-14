@@ -5,23 +5,55 @@
 <div class="row">
     <!-- Column -->
     <div class="col-lg-4 col-xlg-3 col-md-5">
+
         <div class="card">
             <div class="card-body">
-                <div class="m-t-30"> <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
-                    <h4 class="card-title m-t-10">Hanna Gover</h4>
-                    <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
-                    <div class="row text-center justify-content-md-center">
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
-                    </div>
+
+                <div class="m-t-30">
+                    <!--[src]="profile.shop_photo | images"-->
+                    <img *ngIf="!imagePreview" [src]="profile.shop_photo | images" class="img-circle" width="150" />
+                    <img *ngIf="imagePreview" width="150" class="img-circle" [src]="imagePreview">
+                    <h4 class="card-title m-t-10"> {{ profile.shop_name }} </h4>
+                    <h6 class="card-subtitle">Cuenta de Empresas</h6>
+                    <br>
+                    <form class="form-material">
+                        <div class="form-group">
+                            <label></label>
+                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                <div *ngIf="!buttonSend">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-default btn-file">
+                                     <span class="fileinput-new">Selecciona una imagen</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="hidden">
+                                    <input type="hidden">
+                                    <input (change)="profileChanged( $event.target.files[0])" type="file" name="shop_photo">
+                                    </span>
+                                </div>
+                                <button (click)="sendObjectToBackend()" *ngIf="buttonSend" class="btn btn-outline-danger btn-block">
+                                        Actualizar imagen
+                                </button>
+                            </div>
+                        </div>
+                        <fieldset style="display:none">
+                            <input [(ngModel)]="shop_name" type="hidden" name="shop_name">
+                            <input [(ngModel)]="shop_address" type="hidden" name="shop_address">
+                            <input [(ngModel)]="shop_phone" type="hidden" name="shop_phone">
+                            <input [(ngModel)]="user_id" type="hidden" name="user_id">
+                        </fieldset>
+                    </form>
                 </div>
+
             </div>
             <div>
                 <hr> </div>
-            <div class="card-body"> <small class="text-muted">Email address </small>
-                <h6>hannagover@gmail.com</h6> <small class="text-muted p-t-30 db">Phone</small>
-                <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
-                <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
+            <div class="card-body"> <small class="text-muted">Correo electrónico </small>
+                <h6> {{ profile.shop_email }} </h6> <small class="text-muted p-t-30 db">Teléfono</small>
+                <h6> {{ profile.shop_phone }} </h6> <small class="text-muted p-t-30 db"> Dirección </small>
+                <h6> {{ profile.shop_address }} </h6>
 
                 <br/>
             </div>
@@ -34,58 +66,37 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs profile-tab" role="tablist">
 
-                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Datos de perfíl</a> </li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" id="settings" role="tabpanel">
                     <div class="card-body">
-                        <form class="form-horizontal form-material">
+                        <form ngNativeValidate #f="ngForm" (ngSubmit)="updateProfile(f)" class="form-horizontal form-material">
                             <div class="form-group">
-                                <label class="col-md-12">Full Name</label>
+                                <label class="col-md-12">Nombre de la empresa</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                                    <input name="shop_name" [(ngModel)]="shop_name" required type="text" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="example-email" class="col-md-12">Email</label>
+                                <label for="example-email" class="col-md-12">Dirección</label>
                                 <div class="col-md-12">
-                                    <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                    <input name="shop_address" [(ngModel)]="shop_address" required type="text" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Password</label>
+                                <label class="col-md-12">Teléfono</label>
                                 <div class="col-md-12">
-                                    <input type="password" value="password" class="form-control form-control-line">
+                                    <input name="shop_phone" [(ngModel)]="shop_phone" required type="number" value="password" class="form-control form-control-line">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Phone No</label>
-                                <div class="col-md-12">
-                                    <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Message</label>
-                                <div class="col-md-12">
-                                    <textarea rows="5" class="form-control form-control-line"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-12">Select Country</label>
-                                <div class="col-sm-12">
-                                    <select class="form-control form-control-line">
-                                                        <option>London</option>
-                                                        <option>India</option>
-                                                        <option>Usa</option>
-                                                        <option>Canada</option>
-                                                        <option>Thailand</option>
-                                                    </select>
-                                </div>
-                            </div>
+                            <fieldset style="display:none">
+                                <input [(ngModel)]="user_id" name="user_id" type="hidden">
+                            </fieldset>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success">Update Profile</button>
+                                    <button [disabled]="!f.valid" type="submit" class="btn btn-success">Actualizar perfil</button>
                                 </div>
                             </div>
                         </form>

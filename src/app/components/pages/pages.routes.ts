@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 /*
@@ -18,11 +18,13 @@ import { PagesComponent } from './pages.component';
 import { SellersComponent } from './sellers/sellers.component';
 import { BalanceComponent } from './balance/balance.component';
 import { InvoiceComponent } from './admin/orders/invoice.component';
+import { VerifyLoginGuard } from '../../GUARDS/verify-login.guard';
 
 
 
 const routes: Routes = [
     {path: '', component: PagesComponent,
+    canActivate: [VerifyLoginGuard],
      children: [
        {path: 'dashboard', component: DashboardComponent, data: {title: 'Panel de control'}},
        {path: 'profile', component: ProfileComponent, data: {title: 'Datos de la empresa'}},
