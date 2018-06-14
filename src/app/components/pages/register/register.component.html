@@ -1,0 +1,72 @@
+<section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/ragazza.jpg);">
+    <div style="top:-1em" class="login-box card">
+        <div class="card-body">
+            <form ngNativeValidate [formGroup]="form" class="form-horizontal form-material" id="loginform">
+                <!--<a href="javascript:void(0)" class="text-center db">
+                    <img style="width:250px" class="img-fluid" src="../assets/images/logo.jpg" alt="Home" /><br/>
+                </a>-->
+                <h3 class="box-title m-t-40 m-b-0">Registrarme</h3><small>Crea una cuenta de empresas y comienza a vender!</small>
+                <div class="form-group m-t-20">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="shop_name" formControlName='shop_name' name="shop_name" class="form-control" type="text" required placeholder="Nombre de la empresa">
+                    </div>
+                </div>
+                <div class="form-group m-t-20">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="shop_address" formControlName='shop_address' name="shop_address" class="form-control" type="text" placeholder="Dirección de la empresa">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="shop_email" formControlName='shop_email' name="shop_email" class="form-control" type="email" required placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="shop_password" formControlName='shop_password' name="shop_password" required minlength="5" class="form-control" type="password" required placeholder="Contraseña">
+                        <p *ngIf="form.controls['shop_password'].errors?.minlength" class="text-danger">
+                            Por su seguridad la contraseña debe tener al menos 5 carácteres
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="shop_password2" formControlName='shop_password2' name="shop_password2" required minlength="5" class="form-control" type="password" required="" placeholder="Confirmar Contraseña">
+                        <p *ngIf="form.errors?.passwordMatch && !form.pristine" class="text-danger">
+                            Las contraseñas deben ser iguales
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="shop_phone" formControlName='shop_phone' name="shop_phone" class="form-control" type="number" placeholder="Teléfono">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary p-t-0">
+                            <input formControlName="conditions" required name="conditions" value="true" id="checkbox-signup" type="checkbox">
+                            <label for="checkbox-signup"> Acepto los terminos y <a href="#">Condiciones de Servicios</a></label>
+                        </div>
+                        <p *ngIf="form.controls['conditions'].errors?.required && !form.pristine" class="text-danger">
+                            Debe aceptar los terminos y Condiciones
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button (click)="registerNewShop()" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Registrarme</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Ya tienes una cuenta empresas? <a [routerLink]="['/login']" class="text-info m-l-5"><b>Inicia sesión</b></a></p>
+                    </div>
+                </div>
+                <fieldset style="display:none">
+                    <input formControlName="customer_group_id" type="hidden" name="customer_group_id" value="2">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>

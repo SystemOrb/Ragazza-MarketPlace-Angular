@@ -1,0 +1,47 @@
+<section id="wrapper">
+    <div class="login-register" style="background-image:url(../assets/images/background/shop.jpg);">
+        <div class="login-box card">
+            <div class="card-body">
+                <form ngNativeValidate [formGroup]="form" class="form-horizontal form-material" id="loginform">
+                    <!--<h3 class="box-title m-b-20">RagazzaShop Empresas</h3>-->
+                    <a target="_blank" href="http://ragazzashop.com">
+                        <img class="img-fluid" src="../assets/images/logo.jpg" alt="">
+                    </a>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input [(ngModel)]="shop_email" formControlName='shop_email' name="shop_email" class="form-control" type="email" required="" placeholder="Email"> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input [(ngModel)]="shop_password" formControlName='shop_password' name="shop_password" class="form-control" type="password" required="" placeholder="Contraseña"> </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right">
+                                <i class="fa fa-lock m-r-5"></i> Olvidaste tu contraseña?</a>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="col-xs-12 p-b-20">
+                            <button [disabled]="!form.valid" (click)="authUser()" class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Entrar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                            <div class="social">
+                                <!--<a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
+                                -->
+                                <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            No tienes una cuenta de empresas? <a [routerLink]="['/register']" class="text-info m-l-5"><b>Registrate ahora!</b></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

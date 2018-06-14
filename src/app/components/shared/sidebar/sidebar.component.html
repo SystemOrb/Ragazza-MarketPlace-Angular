@@ -1,0 +1,48 @@
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="user-profile">
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
+                        <img src="../assets/images/users/profile.png" alt="user" />
+                        <span class="hide-menu">Steave Jobs </span>
+                    </a>
+                </li>
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap">PERSONAL</li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                        <i class="mdi mdi-gauge"></i>
+                        <span class="hide-menu">Panel de control
+                        <span class="label label-rouded label-themecolor pull-right">4</span>
+                        </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a [routerLink]="['/profile']">Perfil </a></li>
+                        <li><a>Configuración</a></li>
+                        <li><a [routerLink]="['/balance']">Balance</a></li>
+                        <li><a>Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                        <i class="mdi mdi-credit-card-multiple"></i>
+                        <span class="hide-menu">
+                            Administración 
+                            <span class="label label-rouded label-themecolor pull-right">4</span>
+                        </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a [routerLink]="['/products']">Productos </a></li>
+                        <li><a [routerLink]="['/orders']">Pedidos</a></li>
+                        <li><a [routerLink]="['/sellers']">Historial de ventas</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>

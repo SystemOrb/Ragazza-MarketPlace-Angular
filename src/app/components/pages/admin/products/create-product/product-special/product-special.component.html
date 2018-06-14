@@ -1,0 +1,53 @@
+<app-links></app-links>
+<div class="row" align="center">
+    <div class="card col-12">
+        <div class="card-body">
+            <h4 class="card-title">Mis descuentos</h4>
+            <h6 class="card-subtitle">
+                <button class="btn btn-primary">
+                    <i class="fa fa-plus"></i>&nbsp;Agregar un descuento
+                </button>
+            </h6>
+            <div class="table-responsive m-t-40">
+                <div id="myTable_wrapper" class="dataTables_wrapper no-footer">
+                    <table id="myTable" class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="myTable_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 190px;">Stock</th>
+                                <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 301px;">Precio</th>
+                                <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 141px;">Fecha de inicio</th>
+                                <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 73px;">Fin</th>
+                                <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 73px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr role="row" class="odd">
+                                <td> </td>
+                                <td> </td>
+                                <td>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-primary">
+                                              <span class="fa fa-save"></span>
+                                            </button>
+                                    <button style="margin-left:5px" class="btn btn-danger">
+                                               <span class="fa fa-trash-o"></span> 
+                                              </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="dataTables_info" id="myTable_info" role="status" aria-live="polite">Total de usuarios registrados&nbsp;<strong>  </strong> </div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                        <a class="paginate_button previous">Anterior</a>
+                        <span>
+                               </span>
+                        <a class="paginate_button next">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-modal-form></app-modal-form>

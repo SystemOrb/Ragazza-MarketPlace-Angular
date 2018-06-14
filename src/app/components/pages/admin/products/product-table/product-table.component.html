@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Mis productos</h4>
+                <h6 class="card-subtitle">Lista de productos que vendes en Ragazza</h6>
+                <div class="row m-t-40">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-info text-center">
+                                <h1 class="font-light text-white">2,064</h1>
+                                <h6 class="text-white">Productos</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white">1100</h1>
+                                <h6 class="text-white">Ventas</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
+                        <thead>
+                            <tr>
+
+                                <th>Imagen</th>
+                                <th>Nombre del producto</th>
+                                <th>Modelo</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="javascript:void(0)">
+                                        <img src="../assets/images/users/1.jpg" alt="user" style="width:70px" class="img-circle img-thumbnail" />
+                                    </a>
+                                </td>
+                                <td>Anika. MultiColors</td>
+                                <td>Anika</td>
+
+                                <td>$120</td>
+                                <td>100</td>
+                                <td><span class="label label-warning">Disponible</span> </td>
+                                <td>
+                                    <!--<button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete">
+                                      asdasd
+                                    </button>-->
+                                    <button class="btn btn-primary">
+                                      <span class="ti-pencil"></span>
+                                    </button>
+                                    <button style="margin-left: 3px" class="btn btn-secondary">
+                                        <span class="ti-trash"></span>
+                                      </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <a [routerLink]="['/product-info','nuevo']" class="btn btn-info btn-rounded">
+                                        <i class="mdi mdi-hanger"></i>&nbsp;Agregar producto nuevo
+                                    </a>
+                                </td>
+                                <td colspan="6">
+                                    <div class="text-right">
+                                        <ul class="pagination"> </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

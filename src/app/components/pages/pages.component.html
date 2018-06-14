@@ -1,0 +1,22 @@
+<div id="main-wrapper">
+    <!-- HEADER -->
+    <app-header></app-header>
+    <!-- END HEADER -->
+    <!-- MENU -->
+    <app-sidebar></app-sidebar>
+    <!-- END MENU -->
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <!-- BREADCRUMBS -->
+            <app-breadcrumbs></app-breadcrumbs>
+            <!-- END BREADCRUMBS -->
+            <!-- START CONTENT -->
+            <router-outlet></router-outlet>
+            <!-- END CONTENT -->
+            <!-- SETTIGNS -->
+            <app-settings></app-settings>
+            <!-- END SETTINGS -->
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>
