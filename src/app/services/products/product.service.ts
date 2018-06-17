@@ -11,9 +11,7 @@ import { ProductDescription } from '../../models/products/product-description.cl
 import { ProductAttributes } from '../../models/products/product-attr.class';
 import { ProductOffers } from '../../models/products/product-discount.class';
 import { ProductImages } from '../../models/products/product-images.class';
-import { CategoryType } from '../../models/filters/categories.class';
-import { FilterType } from '../../models/filters/filters.class';
-import { ManufacturerType } from '../../models/filters/manufacturer.class';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +19,8 @@ import { ManufacturerType } from '../../models/filters/manufacturer.class';
 export class ProductService {
   public navigationUrl: string | number;
   public navigation: Boolean; // Si es nuevo, se oculta si un update ,aparece
+  public collection: string;
+  public modal: Boolean = false;
   /**
    *
    * Temporals
@@ -166,21 +166,6 @@ export class ProductService {
      }),
    );
  }
- InsertProductImages(formImage: ProductImages, operationType: string) {
-    const formImageData = new FormData();
-    formImageData.append('product_id', formImage.product_id);
-    formImageData.append('image', formImage.image);
-    formImageData.append('sort_order', formImage.sort_order);
-    const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
-    return this._http.post(url, formImageData).pipe(
-     map( (response: any) => {
-       console.log(response);
-     }), catchError( (err: Observable<string | Boolean>) => {
-       console.log(err);
-       return new Observable<string | boolean>();
-     }),
-   );
- }
 /**********************************************************
  * END CREATE NEW PRODUCT DISCOUNT
  **********************************************************/
@@ -279,4 +264,54 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
  /**********************************************************
  * END OPENCART ITEMS
  **********************************************************/
+ /**********************************************************
+ * START DISCOUNT AND SPECIAL ITEMS
+ **********************************************************/
+ insertOfferItem(collection: string, oferData: ProductOffers) {
+   const objectOffer = new FormData();
+   objectOffer.append('product_id', oferData.product_id);
+   objectOffer.append('customer_group_id', oferData.customer_group_id);
+   objectOffer.append('quantity', oferData.quantity);
+   objectOffer.append('price', oferData.price);
+   objectOffer.append('date_start', oferData.date_start);
+   objectOffer.append('date_end', oferData.date_end);
+   objectOffer.append('product_special_id', oferData.product_special_id);
+   objectOffer.append('product_discount_id', oferData.product_discount_id);
+   objectOffer.append('priority', oferData.priority);
+   const url = HTTP_SERVICE + '/products.php?operationType=' + collection;
+   return this._http.post(url, objectOffer).pipe(
+     map( (offer: any) => {
+       return offer;
+     }),
+     catchError( (err: Observable<string | Boolean>) => {
+      console.log(err);
+      return new Observable<string | boolean>();
+    }),
+   );
+ }
+/**********************************************************
+ * END DISCOUNT AND SPECIAL ITEMS
+ **********************************************************/
+   /**************************************************************
+   * IMAGES
+   ***************************************************************/
+    addImageToProduct(_imageData: ProductImages) {
+      const objectImage = new FormData();
+      objectImage.append('product_id', _imageData.product_id);
+      objectImage.append('image', _imageData.image);
+      objectImage.append('product_image_id', _imageData.product_image_id);
+      const url = HTTP_SERVICE + '/products.php?operationType=insertImage';
+      return this._http.post(url, objectImage).pipe(
+        map( (imageResp: any) => {
+          return imageResp;
+        }),
+        catchError( (err: Observable<string | Boolean>) => {
+          console.log(err);
+          return new Observable<string | boolean>();
+        }),
+      );
+    }
+   /**************************************************************
+   * FIN IMAGES
+   ***************************************************************/
 }

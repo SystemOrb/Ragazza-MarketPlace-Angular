@@ -4,6 +4,7 @@ import { ProductService } from '../../../../../../services/products/product.serv
 import { ManufacturerType } from '../../../../../../models/filters/manufacturer.class';
 import { CategoryType } from '../../../../../../models/filters/categories.class';
 import { FilterGroup, FilterType } from '../../../../../../models/filters/filters.class';
+import { ActivatedRoute } from '@angular/router';
 declare const swal: any;
 @Component({
   selector: 'app-product-attributes',
@@ -22,7 +23,17 @@ export class ProductAttributesComponent implements OnInit {
      SUBCATEGORY: CategoryType[] = [];
      FILTER_GROUP: FilterGroup[] = [];
      FILTER: FilterType[] = [];
-  constructor(private _product: ProductService) { }
+  constructor(private _product: ProductService, private  _param: ActivatedRoute) {
+    this._param.params.subscribe( (response: any) => {
+      if (response['id'] === 'nuevo') {
+        this._product.navigationUrl = 'nuevo';
+        this._product.navigation = false;
+      } else {
+        this._product.navigationUrl = response['id'];
+        this._product.navigation = true;
+      }
+    });
+  }
 
   ngOnInit() {
     this.form = new FormGroup({

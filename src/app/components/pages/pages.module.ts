@@ -57,7 +57,7 @@ import { ImagesPipe } from '../../pipes/images.pipe';
       SellersComponent,
       BalanceComponent,
       InvoiceComponent,
-      ImagesPipe
+      // ImagesPipe
     ],
     providers: [
     ]

@@ -35,8 +35,10 @@ export class ProductDataComponent implements OnInit {
     private _user: AuthService, private _route: Router) {
       this._param.params.subscribe( (response: any) => {
         if (response['id'] === 'nuevo') {
+          this._product.navigationUrl = 'nuevo';
           this._product.navigation = false;
         } else {
+          this._product.navigationUrl = response['id'];
           this._product.navigation = true;
         }
       });

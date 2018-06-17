@@ -3,9 +3,9 @@
     <div class="card col-12">
         <div class="card-body">
             <h6 class="card-subtitle">
-                <button class="btn btn-info">
-                                    <i class="fa fa-camera"></i>&nbsp;Agregar una imagen
-                                </button>
+                <button (click)="showModal()" class="btn btn-info">
+                    <i class="fa fa-camera"></i>&nbsp;Agregar una imagen
+                 </button>
             </h6>
         </div>
     </div>
@@ -152,3 +152,4 @@
         </div>
     </div>
 </div>
+<app-modal-image></app-modal-image>

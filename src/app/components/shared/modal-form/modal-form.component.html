@@ -1,40 +1,40 @@
-<div class="col-md-4">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Agregar Descuento</h4>
-            <!-- sample modal content -->
-            <div id="responsive-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Agregar un descuento</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-material">
-                                <div class="form-group">
-                                    <label for="recipient-name" class="control-label">Precio de descuento:</label>
-                                    <input data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Será el nuevo precio del artículo" type="number" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="control-label">Fecha de inicio:</label>
-                                    <input class="form-control" type="date">
-                                </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="control-label">Fecha de Fin:</label>
-                                    <input class="form-control" type="date">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger waves-effect waves-light">Guardar cambios</button>
-                        </div>
-                    </div>
-                </div>
+<!-- sample modal content -->
+<div id="responsive-modal" [ngClass]="{ 'showModal': _product.modal }" class="modal fadeIn fadeInRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Agregar un descuento</h4>
+                <button (click)="hideModal()" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <!-- /.modal -->
-            <img src="../assets/images/alert/model.png" alt="default" data-toggle="modal" data-target="#responsive-modal" class="model_img img-responsive">
+            <div class="modal-body">
+                <form ngNativeValidate [formGroup]="form" id="formOffer" (ngSubmit)="createOffer()" class="form-material">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Precio de descuento:</label>
+                        <input required name="price" formControlName="price" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Será el nuevo precio del artículo" type="number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Cantidad de stock:</label>
+                        <input required name="quantity" formControlName="quantity" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Cantidad de stock de artículos en el stock" type="number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Fecha de inicio:</label>
+                        <input required name="date_start" formControlName="date_start" class="form-control" type="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Fecha de Fin:</label>
+                        <input required name="date_end" formControlName="date_end" class="form-control" type="date">
+                    </div>
+                    <fieldset style="display:none">
+                        <input type="hidden" name="product_id" formControlName="product_id">
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="hideModal()" type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
+                <button form="formOffer" type="submit" class="btn btn-danger waves-effect waves-light">Guardar cambios</button>
+            </div>
         </div>
     </div>
 </div>
+<!-- /.modal -->
+<!--<img src="../assets/images/alert/model.png" alt="default" data-toggle="modal" data-target="#responsive-modal" class="model_img img-responsive">-->

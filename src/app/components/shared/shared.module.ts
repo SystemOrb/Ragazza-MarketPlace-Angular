@@ -8,11 +8,16 @@ import { SettingsComponent } from './settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { LinksComponent } from './links/links.component';
 import { ModalFormComponent } from './modal-form/modal-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ModalImageComponent } from './modal-form/modal-image.component';
+import { ImagesPipe } from '../../pipes/images.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     HeaderComponent,
@@ -21,7 +26,9 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     BreadcrumbsComponent,
     SettingsComponent,
     LinksComponent,
-    ModalFormComponent
+    ModalFormComponent,
+    ModalImageComponent,
+    ImagesPipe
   ], exports: [
     HeaderComponent,
     FooterComponent,
@@ -29,7 +36,9 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     BreadcrumbsComponent,
     SettingsComponent,
     LinksComponent,
-    ModalFormComponent
+    ModalFormComponent,
+    ModalImageComponent,
+    ImagesPipe
   ]
 })
 export class SharedModule { }
