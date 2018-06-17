@@ -13,7 +13,6 @@
                     <table id="myTable" class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="myTable_info">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 190px;">Stock</th>
                                 <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 301px;">Precio</th>
                                 <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 141px;">Fecha de inicio</th>
                                 <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 73px;">Fin</th>
@@ -21,12 +20,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr role="row" class="odd">
-                                <td> </td>
-                                <td> </td>
+                            <tr *ngFor="let specialTable of tableDiscounts" role="row" class="odd">
+                                <td> {{ specialTable.price }} </td>
                                 <td>
+                                    {{ specialTable.date_start }}
                                 </td>
-                                <td></td>
+                                <td>
+                                    {{ specialTable.date_end }}
+                                </td>
                                 <td>
                                     <button class="btn btn-primary">
                                               <span class="fa fa-save"></span>

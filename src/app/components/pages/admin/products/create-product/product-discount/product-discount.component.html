@@ -21,19 +21,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr role="row" class="odd">
-                                <td> </td>
-                                <td> </td>
+                            <tr *ngFor="let specialTable of tableDiscounts" role="row" class="odd">
+                                <td> {{ specialTable.price }} </td>
                                 <td>
+                                    {{ specialTable.date_start }}
                                 </td>
-                                <td></td>
+                                <td>
+                                    {{ specialTable.date_end }}
+                                </td>
                                 <td>
                                     <button class="btn btn-primary">
-                                              <span class="fa fa-save"></span>
-                                            </button>
+                                                      <span class="fa fa-save"></span>
+                                                    </button>
                                     <button style="margin-left:5px" class="btn btn-danger">
-                                               <span class="fa fa-trash-o"></span> 
-                                              </button>
+                                                       <span class="fa fa-trash-o"></span> 
+                                                      </button>
                                 </td>
                             </tr>
                         </tbody>

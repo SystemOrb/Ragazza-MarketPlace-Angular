@@ -124,4 +124,7 @@ export class ProductAttributesComponent implements OnInit {
        }
      );
   }
+  setForm() {
+    // this._product.getDBById();
+  }
 }

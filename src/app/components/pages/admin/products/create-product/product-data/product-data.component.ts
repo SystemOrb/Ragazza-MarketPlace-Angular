@@ -31,6 +31,10 @@ export class ProductDataComponent implements OnInit {
    status: StatusType[] = [];
    stock: StockType[] = [];
   /*******************/
+  /**
+   * VARIABLES PARA SETEAR EL FORMULARIO
+   */
+  formData: ProductData;
   constructor(private _product: ProductService, private _param: ActivatedRoute,
     private _user: AuthService, private _route: Router) {
       this._param.params.subscribe( (response: any) => {
@@ -52,9 +56,7 @@ export class ProductDataComponent implements OnInit {
     this.stockType();
     this.lengthType();
     this.weightType();
-    /*
-    FORM CONTROLS
-    */
+    this.setForm();
     this.form = new FormGroup({
       user_id: new FormControl(this._user.user_id, [Validators.required]),
       model: new FormControl('', [Validators.required]),
@@ -186,5 +188,41 @@ export class ProductDataComponent implements OnInit {
         this.weight = fetchObject;
       }
     );
+  }
+  setForm() {
+      /*
+    FORM CONTROLS
+    */
+   this._product.getDBById(this._product.navigationUrl, 'selectData').subscribe(
+    (Response: any) => {
+      for (const object of Response) {
+        this.form.setValue({
+          user_id: object.user_id,
+          model: object.model,
+          price: object.price,
+          quantity: object.quantity,
+          sku: object.sku,
+          upc: object.upc,
+          ean: object.ean,
+          jan: object.jan,
+          isbn: object.isbn,
+          mpn: object.mpn,
+          stock_status_id: object.stock_status_id,
+          image: '',
+          manufacturer_id: object.manufacturer_id,
+          shipping: object.shipping,
+          weight: object.weight,
+          weight_class_id: object.weight_class_id,
+          length: object.length,
+          width: object.width,
+          height: object.height,
+          length_class_id: object.length_class_id,
+          minimum: object.minimum,
+          status: object.status,
+          viewed: object.viewed
+        });
+      }
+    }
+  );
   }
 }

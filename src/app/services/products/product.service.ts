@@ -17,10 +17,10 @@ import { ProductImages } from '../../models/products/product-images.class';
   providedIn: 'root'
 })
 export class ProductService {
-  public navigationUrl: string | number;
+  public navigationUrl: string | number; // la query de la URL
   public navigation: Boolean; // Si es nuevo, se oculta si un update ,aparece
-  public collection: string;
-  public modal: Boolean = false;
+  public collection: string; // Para verificar si es Descuento/Especial
+  public modal: Boolean = false; // Modal
   /**
    *
    * Temporals
@@ -313,5 +313,24 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
     }
    /**************************************************************
    * FIN IMAGES
+   ***************************************************************/
+   /**************************************************************
+   * GETTERS
+   ***************************************************************/
+  getDBById(_key: string | number, search: string) {
+    let url = HTTP_SERVICE + '/products.php?operationType=';
+    url += search + '&product_id=' + _key;
+    return this._http.get(url).pipe(
+      map( (response: any)  => {
+        return response;
+      }),
+      catchError( (err: Observable<string | Boolean>) => {
+        console.log(err);
+        return new Observable<string | boolean>();
+      }),
+    );
+  }
+   /**************************************************************
+   * END GETTERS
    ***************************************************************/
 }

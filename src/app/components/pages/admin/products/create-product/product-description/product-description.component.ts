@@ -38,6 +38,8 @@ export class ProductDescriptionComponent implements OnInit {
       this.meta_description = this._product.productDescription.meta_description;
       this.meta_keyword = this._product.productDescription.meta_keyword;
       this.meta_separadores = this._product.productDescription.meta_tags;
+    } else {
+      this.setForm();
     }
   }
   FormVerification(form: NgForm) {
@@ -74,8 +76,22 @@ export class ProductDescriptionComponent implements OnInit {
           }
         });
       } else {
-        console.log('update');
+        // update
       }
     });
+  }
+  setForm() {
+    this._product.getDBById(this._product.navigationUrl, 'selectDescription').subscribe(
+      (response: any) => {
+        for (const object of response) {
+          this.name = object.name;
+          this.description = object.description;
+          this.tag = object.tag;
+          this.meta_description = object.meta_description;
+          this.meta_keyword = object.meta_keyword;
+          this.meta_separadores = object.meta_title;
+        }
+      }
+    );
   }
 }
