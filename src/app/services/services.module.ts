@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from './auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 // Todos los servicios de la aplicación
-import { HttpModule } from '@angular/http';
+import { ProductService } from './products/product.service';
+import { AuthService } from './auth/auth.service';
 @NgModule({
   imports: [
     CommonModule,
-    // HttpModule
      HttpClientModule
   ],
   declarations: [],
   providers: [
-    AuthService
+    AuthService,
+    ProductService
   ]
 })
 export class ServicesModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../../services/products/product.service';
 
 @Component({
   selector: 'app-links',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinksComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(public _product: ProductService) {
+
+  }
 
   ngOnInit() {
   }

@@ -4,42 +4,54 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Animated line inputs</h4>
-                <h6 class="card-subtitle">Completa este formulario para poder postear tu artículo <code>* Campos requeridos</code></h6>
-                <form class="form-material m-t-40">
+                <h6 class="card-subtitle">Completa este formulario para poder posicionar tu articulo según categorías y filtros de busqueda en Ragazza<code>* Campos requeridos</code></h6>
+                <form ngNativeValidate (ngSubmit)="sendForm()" [formGroup]="form" class="form-material m-t-40">
                     <div class="form-group">
                         <label>Fabricante:<code><small>(Opcional)</small></code></label>
-                        <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                    </select>
+                        <select name="manufacturer" formControlName="manufacturer" class="form-control">
+                            <option *ngFor="let manufacturer of MANUFACTURER" [value]="manufacturer.manufacturer_id">
+                                {{ manufacturer.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Categoría:<code><small>(Opcional)</small></code></label>
-                        <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                        </select>
+                        <select (change)="getSubcategories($event.target.value)" name="category" required formControlName="category" class="form-control">
+                            <option *ngFor="let category of CATEGORY" [value]="category.category_id">
+                               {{ category.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Subcategoría:<code><small>(Opcional)</small></code></label>
-                        <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                            </select>
+                        <select name="subcategory" required formControlName="subcategory" class="form-control">
+                            <option selected disabled value="null">Selecciona una categoría principal primero</option>
+                            <option *ngFor="let subcategory of SUBCATEGORY" [value]="subcategory.category_id">
+                                {{ subcategory.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Filtro Principal:<code><small>(Opcional)</small></code></label>
-                        <select class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                </select>
+                        <select (change)="getFilter($event.target.value)" name="filter_group" required formControlName="filter_group" class="form-control">
+                            <option *ngFor="let filter of FILTER_GROUP" [value]="filter.filter_group_id">
+                                {{ filter.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Filtro secundario:<code><small>(Opcional)</small></code></label>
-                        <select class="form-control">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                    </select>
+                        <select name="filter" required formControlName="filter" class="form-control">
+                            <option disabled selected value="null">Selecciona un filtro principal primero</option>
+                            <option *ngFor="let filter of FILTER" [value]="filter.filter_id">
+                                {{ filter.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-danger">
+                            Guardar cambios
+                        </button>
                     </div>
                 </form>
             </div>

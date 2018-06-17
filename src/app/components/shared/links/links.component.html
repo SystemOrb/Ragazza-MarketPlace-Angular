@@ -1,19 +1,20 @@
-<div class="form-group">
-    <button [routerLink]="['/product-info','nuevo']" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
+<div *ngIf="_product.navigation" class="form-group">
+    <button [routerLink]="['/product-info',_product.navigationUrl]" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
       Descripción
-    </button> &nbsp; <button [routerLink]="['/product-data', 'nuevo']" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
+    </button> &nbsp; <button [routerLink]="['/product-data', _product.navigationUrl]" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
       Data
     </button> &nbsp;
-    <button [routerLink]="['/product-help', 'nuevo']" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
+    <button [routerLink]="['/product-help', _product.navigationUrl]" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
       Atributos
     </button> &nbsp;
-    <button [routerLink]="['/product-discount', 'nuevo']" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
+    <button [routerLink]="['/product-discount', _product.navigationUrl]" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
       Descuentos
     </button> &nbsp;
-    <button [routerLink]="['/product-special', 'nuevo']" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
+    <button [routerLink]="['/product-special', _product.navigationUrl]" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
       Especial
     </button> &nbsp;
-    <button [routerLink]="['/product-images', 'nuevo']" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
+    <button [routerLink]="['/product-images', _product.navigationUrl]" id="demo-btn-addrow" class="btn btn-outline-info"><i class="icon wb-plus" aria-hidden="true"></i>
       Imagenes
     </button>
+
 </div>
