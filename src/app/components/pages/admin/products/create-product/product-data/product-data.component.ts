@@ -25,6 +25,7 @@ export class ProductDataComponent implements OnInit {
   imagePreview: string;
   profileImage: File;
   loading: boolean = false;
+  canUpdate: boolean = false; // Variables que nos indicará si es de tipo Insert o Update
   /* Items Dinamicos*/
    length: LengthType[] = [];
    weight: WeightType[] = [];
@@ -40,9 +41,11 @@ export class ProductDataComponent implements OnInit {
       this._param.params.subscribe( (response: any) => {
         if (response['id'] === 'nuevo') {
           this._product.navigationUrl = 'nuevo';
+          this.canUpdate = false;
           this._product.navigation = false;
         } else {
           this._product.navigationUrl = response['id'];
+          this.canUpdate = true;
           this._product.navigation = true;
         }
       });
@@ -56,7 +59,9 @@ export class ProductDataComponent implements OnInit {
     this.stockType();
     this.lengthType();
     this.weightType();
-    this.setForm();
+    if (this.canUpdate) {
+      this.setForm();
+    }
     this.form = new FormGroup({
       user_id: new FormControl(this._user.user_id, [Validators.required]),
       model: new FormControl('', [Validators.required]),
@@ -70,7 +75,7 @@ export class ProductDataComponent implements OnInit {
       isbn: new FormControl(''),
       mpn: new FormControl(''),
       stock_status_id: new FormControl(''),
-      image: new FormControl('', [Validators.required]),
+      image: new FormControl(''),
       manufacturer_id: new FormControl(''),
       shipping: new FormControl(''),
       weight: new FormControl(''),
@@ -89,7 +94,7 @@ export class ProductDataComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    if (this._product.productDescription !== null) {
+    if (this.canUpdate) {
       const sendPackage = new ProductData(
         this._user.user_id,
         this.form.value.model,
@@ -113,36 +118,74 @@ export class ProductDataComponent implements OnInit {
         this.form.value.length_class_id,
         this.form.value.minimum,
         this.form.value.status,
-        null
+        null,
+        this._product.navigationUrl
       );
-      swal({
-        title: 'Confirmación',
-        text: 'Por favor confirma que quieres publicar este producto',
-        icon: 'info',
-        buttons: true,
-        dangerMode: false,
-      })
-      .then((willSend) => {
-        if (willSend) {
-          this.loading = true;
-          this._product.createNewData(sendPackage, 'insert').subscribe(
-            (response: any) => {
-              if (response.status) {
-                this._product.productDescription.product_id = response.data;
-                this._product.CreateNewProductDescription(this._product.productDescription, 'insertDescription').subscribe();
-                swal('Enhorabuena!', response.message, 'success');
-                this._product.productDescription = null;
-                this._product.productData = null;
-                this.loading = false;
-                this._route.navigate(['/product-info', response.data]);
-              }
-            }
-          );
+      this._product.createNewData(sendPackage, 'update').subscribe(
+        (resp: any) => {
+           if (resp.status) {
+             swal('Mensaje', 'Información del producto actualizada con éxito', 'success');
+           }
         }
-      });
+      );
     } else {
-      swal('Ops!', 'Hemos detectado que te faltan campos, revisa la pestaña anterior', 'warning');
+      // SINO ENTONCES UN INSERT
+      if (this._product.productDescription !== null) {
+        const sendPackage = new ProductData(
+          this._user.user_id,
+          this.form.value.model,
+          this.form.value.price,
+          this.form.value.quantity,
+          this.form.value.sku,
+          this.form.value.upc,
+          this.form.value.ean,
+          this.form.value.jan,
+          this.form.value.isbn,
+          this.form.value.mpn,
+          this.form.value.stock_status_id,
+          this.profileImage,
+          null,
+          null,
+          this.form.value.weight,
+          this.form.value.weight_class_id,
+          this.form.value.length,
+          this.form.value.width,
+          this.form.value.height,
+          this.form.value.length_class_id,
+          this.form.value.minimum,
+          this.form.value.status,
+          null
+        );
+        swal({
+          title: 'Confirmación',
+          text: 'Por favor confirma que quieres publicar este producto',
+          icon: 'info',
+          buttons: true,
+          dangerMode: false,
+        })
+        .then((willSend) => {
+          if (willSend) {
+            this.loading = true;
+            this._product.createNewData(sendPackage, 'insert').subscribe(
+              (response: any) => {
+                if (response.status) {
+                  this._product.productDescription.product_id = response.data;
+                  this._product.CreateNewProductDescription(this._product.productDescription, 'insertDescription').subscribe();
+                  swal('Enhorabuena!', response.message, 'success');
+                  this._product.productDescription = null;
+                  this._product.productData = null;
+                  this.loading = false;
+                  this._route.navigate(['/product-info', response.data]);
+                }
+              }
+            );
+          }
+        });
+      } else {
+        swal('Ops!', 'Hemos detectado que te faltan campos, revisa la pestaña anterior', 'warning');
+      }
     }
+    // Si no cumple el bloque anterior entonces es un update
   }
   changePicture(file: File) {
     if (!file) {

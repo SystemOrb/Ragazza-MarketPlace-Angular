@@ -19,6 +19,7 @@ import { SellersComponent } from './sellers/sellers.component';
 import { BalanceComponent } from './balance/balance.component';
 import { InvoiceComponent } from './admin/orders/invoice.component';
 import { VerifyLoginGuard } from '../../GUARDS/verify-login.guard';
+import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes = [
        {path: 'product-info/:id', component: ProductDescriptionComponent, data: {title: 'Información del producto'}},
        {path: 'product-data/:id', component: ProductDataComponent, data: {title: 'Datos del producto'}},
        {path: 'product-help/:id', component: ProductAttributesComponent, data: {title: 'Datos de busqueda del producto'}},
+       {path: 'filters/:id', component: FilterTableComponent, data: {title: 'Filtros de busqueda del producto'}},
        {path: 'product-discount/:id', component: ProductDiscountComponent, data: {title: 'Datos de descuento del producto'}},
        {path: 'product-special/:id', component: ProductSpecialComponent, data: {title: 'Oferta especial del producto'}},
        {path: 'product-images/:id', component: ProductImagesComponent, data: {title: 'Imagenes del producto'}}

@@ -3,7 +3,7 @@ import { ProductService } from '../../../../../../services/products/product.serv
 import { ActivatedRoute } from '@angular/router';
 import { ProductOffers } from '../../../../../../models/products/product-discount.class';
 import { ModalService } from '../../../../../../services/modal/modal.service';
-
+declare const swal: any;
 @Component({
   selector: 'app-product-discount',
   templateUrl: './product-discount.component.html',
@@ -46,5 +46,54 @@ export class ProductDiscountComponent implements OnInit {
       }
     );
   }
-
+  updateTable(table: ProductOffers) {
+    const package_ = new ProductOffers(
+      table.product_id,
+      table.customer_group_id,
+      table.quantity,
+      table.price,
+      table.date_start,
+      table.date_end,
+      null,
+      table.product_discount_id,
+      table.priority
+    );
+    this._product.insertOfferItem('updateDiscount', package_).subscribe(
+      (updateOfer: any) => {
+        if (updateOfer.status) {
+          swal('Mensaje', 'Descuento ' + updateOfer.message, 'success' );
+        } else {
+          swal('Mensaje', 'Completa todos los campos para actualizar', 'warning' );
+          return;
+        }
+      }
+    );
+  }
+  deleteItem(tableItem: ProductOffers, _key: number) {
+    swal({
+      title: 'Confirmación',
+      text: '¿Estás seguro que deseas eliminar este descuento?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willSend) => {
+      if (willSend) {
+        const package_ = new ProductOffers(
+          tableItem.product_id,
+          tableItem.customer_group_id,
+          tableItem.quantity,
+          tableItem.price,
+          tableItem.date_start,
+          tableItem.date_end,
+          null,
+          tableItem.product_discount_id,
+          tableItem.priority
+        );
+        this._product.DeleteProductDiscount(package_ , 'deleteDiscount').subscribe(
+          (response: any) => this.tableDiscounts.splice(_key)
+        );
+      }
+    });
+  }
 }

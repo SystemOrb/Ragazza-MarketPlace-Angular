@@ -20,19 +20,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let specialTable of tableDiscounts" role="row" class="odd">
-                                <td> {{ specialTable.price }} </td>
+                            <tr *ngFor="let specialTable of tableDiscounts; let _key = index" role="row" class="odd">
                                 <td>
-                                    {{ specialTable.date_start }}
+                                    <div class="form-material">
+                                        <div class="form-group">
+                                            <input [(ngModel)]="specialTable.price" [value]="specialTable.price" class="form-control" type="number">
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
-                                    {{ specialTable.date_end }}
+                                    <div class="form-material">
+                                        <div class="form-group">
+                                            <input [(ngModel)]="specialTable.date_start" [value]="specialTable.date_start" class="form-control" type="date">
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary">
+                                    <div class="form-material">
+                                        <div class="form-group">
+                                            <input [(ngModel)]="specialTable.date_end" [value]="specialTable.date_end" class="form-control" type="date">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button (click)="updateTable(specialTable)" class="btn btn-primary">
                                               <span class="fa fa-save"></span>
                                             </button>
-                                    <button style="margin-left:5px" class="btn btn-danger">
+                                    <button (click)="deleteItem(specialTable, _key)" style="margin-left:5px" class="btn btn-danger">
                                                <span class="fa fa-trash-o"></span> 
                                               </button>
                                 </td>

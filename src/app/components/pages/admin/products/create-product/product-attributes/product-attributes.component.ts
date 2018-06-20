@@ -4,7 +4,7 @@ import { ProductService } from '../../../../../../services/products/product.serv
 import { ManufacturerType } from '../../../../../../models/filters/manufacturer.class';
 import { CategoryType } from '../../../../../../models/filters/categories.class';
 import { FilterGroup, FilterType } from '../../../../../../models/filters/filters.class';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 declare const swal: any;
 @Component({
   selector: 'app-product-attributes',
@@ -23,7 +23,8 @@ export class ProductAttributesComponent implements OnInit {
      SUBCATEGORY: CategoryType[] = [];
      FILTER_GROUP: FilterGroup[] = [];
      FILTER: FilterType[] = [];
-  constructor(private _product: ProductService, private  _param: ActivatedRoute) {
+  constructor(private _product: ProductService, private  _param: ActivatedRoute
+  , private _route: Router) {
     this._param.params.subscribe( (response: any) => {
       if (response['id'] === 'nuevo') {
         this._product.navigationUrl = 'nuevo';
@@ -37,11 +38,11 @@ export class ProductAttributesComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      manufacturer: new FormControl(null),
-      category: new FormControl(null, [Validators.required]),
-      subcategory: new FormControl(null, [Validators.required]),
-      filter_group: new FormControl(null, [Validators.required]),
-      filter: new FormControl(null, [Validators.required])
+      manufacturer: new FormControl(''),
+      category: new FormControl('', [Validators.required]),
+      subcategory: new FormControl('', [Validators.required]),
+      filter_group: new FormControl('', [Validators.required]),
+      filter: new FormControl('', [Validators.required])
     });
     this.getManufacturer();
     this.getCategory();
@@ -54,10 +55,12 @@ export class ProductAttributesComponent implements OnInit {
     }
     this._product.insertItemOpencart(this.form.value.category,
     this.form.value.filter, this.form.value.filter_group,
-    this.form.value.manufacturer, this.form.value.subcategory).subscribe(
+    this.form.value.manufacturer, this.form.value.subcategory,
+    this._product.navigationUrl).subscribe(
       (resp: any) => {
         if (resp.status) {
           swal('Enhorabuena!', resp.message + ' Mientras mas datos agregues mas posicionamiento tendrá tu producto!', 'success');
+          this._route.navigate(['/filters', this._product.navigationUrl]);
         }
       }
     );
@@ -126,5 +129,8 @@ export class ProductAttributesComponent implements OnInit {
   }
   setForm() {
     // this._product.getDBById();
+  }
+  goParent() {
+    this._route.navigate(['filters', this._product.navigationUrl]);
   }
 }

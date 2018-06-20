@@ -1,4 +1,3 @@
-<app-links></app-links>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -15,7 +14,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Categoría:<code><small>(Opcional)</small></code></label>
+                        <label>Categoría:<code><small>(Requerido)</small></code></label>
                         <select (change)="getSubcategories($event.target.value)" name="category" required formControlName="category" class="form-control">
                             <option *ngFor="let category of CATEGORY" [value]="category.category_id">
                                {{ category.name }}
@@ -23,7 +22,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Subcategoría:<code><small>(Opcional)</small></code></label>
+                        <label>Subcategoría:<code><small>(Requerido)</small></code></label>
                         <select name="subcategory" required formControlName="subcategory" class="form-control">
                             <option selected disabled value="null">Selecciona una categoría principal primero</option>
                             <option *ngFor="let subcategory of SUBCATEGORY" [value]="subcategory.category_id">
@@ -32,7 +31,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Filtro Principal:<code><small>(Opcional)</small></code></label>
+                        <label>Filtro Principal:<code><small>(Requerido)</small></code></label>
                         <select (change)="getFilter($event.target.value)" name="filter_group" required formControlName="filter_group" class="form-control">
                             <option *ngFor="let filter of FILTER_GROUP" [value]="filter.filter_group_id">
                                 {{ filter.name }}
@@ -40,7 +39,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Filtro secundario:<code><small>(Opcional)</small></code></label>
+                        <label>Filtro secundario:<code><small>(Requerido)</small></code></label>
                         <select name="filter" required formControlName="filter" class="form-control">
                             <option disabled selected value="null">Selecciona un filtro principal primero</option>
                             <option *ngFor="let filter of FILTER" [value]="filter.filter_id">
@@ -51,6 +50,9 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-outline-danger">
                             Guardar cambios
+                        </button> &nbsp;
+                        <button (click)="goParent()" type="button" class="btn btn-default">
+                            Cancelar
                         </button>
                     </div>
                 </form>

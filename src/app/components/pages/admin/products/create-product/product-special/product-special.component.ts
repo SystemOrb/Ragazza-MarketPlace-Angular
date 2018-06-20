@@ -3,7 +3,7 @@ import { ProductService } from '../../../../../../services/products/product.serv
 import { ActivatedRoute } from '@angular/router';
 import { ProductOffers } from '../../../../../../models/products/product-discount.class';
 import { ModalService } from '../../../../../../services/modal/modal.service';
-
+declare const swal: any;
 @Component({
   selector: 'app-product-special',
   templateUrl: './product-special.component.html',
@@ -45,5 +45,58 @@ export class ProductSpecialComponent implements OnInit {
   }
   showModal() {
     this._product.modal = true;
+  }
+  updateTable(table: ProductOffers) {
+    const package_ = new ProductOffers(
+      table.product_id,
+      table.customer_group_id,
+      table.quantity,
+      table.price,
+      table.date_start,
+      table.date_end,
+      table.product_special_id,
+      null,
+      table.priority
+    );
+    this._product.insertOfferItem('updateSpecial', package_).subscribe(
+      (updateOfer: any) => {
+        if (updateOfer.status) {
+          swal('Mensaje', 'Descuento ' + updateOfer.message, 'success' );
+        } else {
+          swal('Mensaje', 'Completa todos los campos para actualizar', 'warning' );
+          return;
+        }
+      }
+    );
+  }
+  deleteItem(tableItem: ProductOffers, _key: number) {
+    swal({
+      title: 'Confirmación',
+      text: '¿Estás seguro que deseas eliminar esta oferta?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willSend) => {
+      if (willSend) {
+        const package_ = new ProductOffers(
+          tableItem.product_id,
+          tableItem.customer_group_id,
+          tableItem.quantity,
+          tableItem.price,
+          tableItem.date_start,
+          tableItem.date_end,
+          tableItem.product_special_id,
+          null,
+          tableItem.priority
+        );
+        this._product.DeleteProductSpecial(package_ , 'deleteSpecial').subscribe(
+          (response: any) => {
+            console.log(response);
+            this.tableDiscounts.splice(_key);
+          }
+        );
+      }
+    });
   }
 }

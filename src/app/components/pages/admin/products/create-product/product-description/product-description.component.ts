@@ -30,6 +30,7 @@ export class ProductDescriptionComponent implements OnInit {
   meta_description: string = '' ;
   meta_keyword: string = '' ;
   meta_separadores: string = '';
+  canUpdate: boolean = false;
   ngOnInit() {
     if (this._product.productDescription != null) {
       this.name = this._product.productDescription.name;
@@ -39,6 +40,7 @@ export class ProductDescriptionComponent implements OnInit {
       this.meta_keyword = this._product.productDescription.meta_keyword;
       this.meta_separadores = this._product.productDescription.meta_tags;
     } else {
+      this.canUpdate = true;
       this.setForm();
     }
   }
@@ -77,6 +79,28 @@ export class ProductDescriptionComponent implements OnInit {
         });
       } else {
         // update
+        if (this.canUpdate) {
+          const object = new ProductDescription(
+            this._product.navigationUrl,
+            '2',
+            form.value.name,
+            form.value.description,
+            form.value.tag,
+            this._user.user_id,
+            form.value.meta_description,
+            form.value.meta_keyword,
+            form.value.meta_separadores
+          );
+          this._product.CreateNewProductDescription(object, 'updateDescription').subscribe(
+            (resp: any) => {
+              if (resp.status) {
+                swal('Mensaje', 'La descripción ha sido actualizada correctamente', 'success');
+              }
+            }
+          );
+        } else {
+          return;
+        }
       }
     });
   }

@@ -1,0 +1,103 @@
+<app-links></app-links>
+<div class="row" align="center">
+    <div class="card col-12">
+        <div class="card-body">
+            <h4 class="card-title">Filtros de posicionamiento</h4>
+            <h6 class="card-subtitle">
+
+                <button (click)="createNewChild()" class="btn btn-primary">
+                  <i class="fa fa-plus"></i>&nbsp;Agregar filtros
+              </button>
+            </h6>
+            <div class="table-responsive m-t-40">
+                <div id="myTable_wrapper" class="dataTables_wrapper no-footer">
+                    <h3>
+                        Filtros
+                    </h3>
+                    <br>
+                    <h6><small>Pulsa en una casilla de la tabla para editar</small></h6>
+
+                    <table id="myTable" id="editable-datatable" class="table table-striped table-bordered" role="grid" aria-describedby="myTable_info">
+
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 190px;">Filtro</th>
+                                <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 301px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let filterData_ of ATTR_FILTER">
+                            <tr role="row" class="odd">
+                                <td>
+                                    <div class="form-material">
+                                        <div class="form-group">
+                                            <select [(ngModel)]="filterData_.filter_id" class="form-control" required>
+                                            <option  *ngFor="let filter of FILTER"
+                                            [value]="filter.filter_id">
+                                              {{ filter.name }}
+                                            </option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary">
+                                          <span class="fa fa-save"></span>
+                                    </button>
+                                    <button style="margin-left:5px" class="btn btn-danger">
+                                                       <span class="fa fa-trash-o"></span> 
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div class="table-responsive m-t-40">
+                <div id="myTable_wrapper" class="dataTables_wrapper no-footer">
+                    <h3>
+                        Categorías
+                    </h3>
+                    <br>
+                    <h6><small>Pulsa en una casilla de la tabla para editar</small></h6>
+
+                    <table id="myTable" id="editable-datatable" class="table table-striped table-bordered" role="grid" aria-describedby="myTable_info">
+
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 190px;">Categoría</th>
+                                <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 301px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let categoryData_ of ATTR_CATEGORY">
+                            <tr role="row" class="odd">
+                                <td>
+                                    <div class="form-material">
+                                        <div class="form-group">
+                                            <select [(ngModel)]="categoryData_.category_id" required class="form-control">
+                                            <option *ngFor="let cat of CATEGORY"
+                                            [value]="cat.category_id">
+                                              {{ cat.name }}
+                                            </option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary">
+                                          <span class="fa fa-save"></span>
+                                    </button>
+                                    <button style="margin-left:5px" class="btn btn-danger">
+                                                       <span class="fa fa-trash-o"></span> 
+                                                      </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -25,6 +25,7 @@ import { BalanceComponent } from './balance/balance.component';
 import { SharedModule } from '../shared/shared.module';
 import { InvoiceComponent } from './admin/orders/invoice.component';
 import { ImagesPipe } from '../../pipes/images.pipe';
+import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
 
 
 
@@ -53,6 +54,7 @@ import { ImagesPipe } from '../../pipes/images.pipe';
       ProductDiscountComponent,
       ProductSpecialComponent,
       ProductImagesComponent,
+      FilterTableComponent,
       NotFoundComponent,
       SellersComponent,
       BalanceComponent,

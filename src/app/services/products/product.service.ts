@@ -17,7 +17,7 @@ import { ProductImages } from '../../models/products/product-images.class';
   providedIn: 'root'
 })
 export class ProductService {
-  public navigationUrl: string | number; // la query de la URL
+  public navigationUrl: string; // la query de la URL
   public navigation: Boolean; // Si es nuevo, se oculta si un update ,aparece
   public collection: string; // Para verificar si es Descuento/Especial
   public modal: Boolean = false; // Modal
@@ -87,7 +87,7 @@ export class ProductService {
     const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
     return this._http.post(url, formData).pipe(
       map( (response: any) => {
-        console.log(response);
+        return response;
       }), catchError( (err: Observable<string | Boolean>) => {
         console.log(err);
         return new Observable<string | boolean>();
@@ -134,7 +134,7 @@ export class ProductService {
       const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
       return this._http.post(url, formDiscountData).pipe(
        map( (response: any) => {
-         console.log(response);
+         return response;
        }), catchError( (err: Observable<string | Boolean>) => {
          console.log(err);
          return new Observable<string | boolean>();
@@ -191,7 +191,7 @@ DeleteProductSpecial(dataProduct: ProductOffers, operationType: string) {
   const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
   return this._http.post(url, objectForm).pipe(
    map( (response: any) => {
-     console.log(response);
+     return response;
    }), catchError( (err: Observable<string | Boolean>) => {
      console.log(err);
      return new Observable<string | boolean>();
@@ -204,7 +204,7 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
   const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
   return this._http.post(url, objectForm).pipe(
    map( (response: any) => {
-     console.log(response);
+     return response;
    }), catchError( (err: Observable<string | Boolean>) => {
      console.log(err);
      return new Observable<string | boolean>();
@@ -243,13 +243,14 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
   }
   insertItemOpencart(category: string | Blob, filter: string | Blob,
   filter_group_id: string | Blob, manufacturer: string | Blob,
-  subcategory: string | Blob) {
+  subcategory: string | Blob, product_id: string | Blob) {
       const objectItem = new FormData();
       objectItem.append('category', category);
       objectItem.append('filter', filter);
       objectItem.append('filter_group', filter_group_id);
       objectItem.append('manufacturer', manufacturer);
       objectItem.append('subcategory', subcategory);
+      objectItem.append('product_id', product_id);
       const url = HTTP_SERVICE + '/insertItem.php';
       return this._http.post(url, objectItem).pipe(
         map( (openCartItem: any) => {
@@ -317,6 +318,22 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
    /**************************************************************
    * GETTERS
    ***************************************************************/
+  updatesOpencartItem(updateInput: ProductAttributes, operationType: string) {
+    const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
+    const object = new FormData();
+    object.append('product_id', updateInput.product_id);
+    object.append('category_id', updateInput.category_id);
+    object.append('filter_id', updateInput.filter_id);
+    return this._http.post(url, object).pipe(
+      map( (response: any)  => {
+        return response;
+      }),
+      catchError( (err: Observable<string | Boolean>) => {
+        console.log(err);
+        return new Observable<string | boolean>();
+      }),
+    );
+  }
   getDBById(_key: string | number, search: string) {
     let url = HTTP_SERVICE + '/products.php?operationType=';
     url += search + '&product_id=' + _key;
