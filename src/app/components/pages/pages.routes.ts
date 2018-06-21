@@ -25,9 +25,9 @@ import { ProductAuthorGuard } from '../../GUARDS/product-author.guard';
 
 
 const routes: Routes = [
-    {path: '', component: PagesComponent,
+    /*{path: '', component: PagesComponent,
     canActivate: [VerifyLoginGuard],
-     children: [
+     children: [*/
        {path: 'dashboard', component: DashboardComponent, data: {title: 'Panel de control'}},
        {path: 'profile', component: ProfileComponent, data: {title: 'Datos de la empresa'}},
        {path: 'orders', component: OrdersComponent, data: {title: 'Datos del pedido'}},
@@ -70,7 +70,7 @@ const routes: Routes = [
          component: ProductImagesComponent,
           data: {title: 'Imagenes del producto'}
         },
-      ]},
+      // ]},
 
     { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
 

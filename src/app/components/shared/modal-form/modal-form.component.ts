@@ -11,7 +11,7 @@ import { ProductOffers } from '../../../models/products/product-discount.class';
 })
 export class ModalFormComponent implements OnInit {
   form: FormGroup;
-  constructor(private _product: ProductService, private _modal: ModalService) { }
+  constructor(public _product: ProductService, public _modal: ModalService) { }
 
   ngOnInit() {
     this.form = new FormGroup({

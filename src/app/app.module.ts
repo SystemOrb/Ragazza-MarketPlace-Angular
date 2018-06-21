@@ -1,28 +1,38 @@
+// Modules from app
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-// Modules from app
 import { SharedModule } from './components/shared/shared.module';
-import { PagesModule } from './components/pages/pages.module';
-import { PagesComponent } from './components/pages/pages.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { APP_ROUTES } from './app.routes';
 import { ServicesModule } from './services/services.module';
+// Routes
+import { APP_ROUTES } from './app.routes';
 import { VerifyLoginGuard } from './GUARDS/verify-login.guard';
 import { ProductAuthorGuard } from './GUARDS/product-author.guard';
-
-
+// Dependencies
+import { AppComponent } from './app.component';
+import { PagesComponent } from './components/pages/pages.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { RegisterComponent } from './components/pages/register/register.component';
+import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PagesComponent
+    PagesComponent,
+    LoginComponent,
+    RegisterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     SharedModule,
-    PagesModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
     HttpClientModule,
     APP_ROUTES,
     ServicesModule
