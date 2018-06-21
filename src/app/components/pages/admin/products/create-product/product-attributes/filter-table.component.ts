@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductAttributes } from '../../../../../../models/products/product-attr.class';
 import { FilterType } from '../../../../../../models/filters/filters.class';
 import { CategoryType } from '../../../../../../models/filters/categories.class';
+import { AuthorService } from '../../../../../../services/products/author.service';
 declare const swal: any;
 @Component({
   selector: 'app-filter-table',
@@ -16,13 +17,17 @@ export class FilterTableComponent implements OnInit {
   FILTER: FilterType[] = [];
   CATEGORY: CategoryType[] = [];
   constructor(private _product: ProductService,
-    private _param: ActivatedRoute, private _route: Router) {
+    private _param: ActivatedRoute, private _route: Router,
+    private _guard: AuthorService) {
       this._param.params.subscribe( (response: any) => {
         if (response['id'] === 'nuevo') {
           this._product.navigationUrl = 'nuevo';
+          this._guard.canView = true;
           this._product.navigation = false;
         } else {
           this._product.navigationUrl = response['id'];
+          this._guard.ID_GUARD = response['id'];
+          this._guard.canView = false;
           this._product.navigation = true;
           this._product.collection = 'insertDiscount';
         }
@@ -64,14 +69,18 @@ export class FilterTableComponent implements OnInit {
   getProductFilter() {
     this._product.getDBById(this._product.navigationUrl, 'selectFilter').subscribe(
       (filterProduct: any) => {
+        if (filterProduct.status !== false) {
         this.ATTR_FILTER = filterProduct;
+        }
       }
     );
   }
   getProductCategory() {
     this._product.getDBById(this._product.navigationUrl, 'selectCategory').subscribe(
       (productCategory: any) => {
-         this.ATTR_CATEGORY = productCategory;
+        if (productCategory.status !== false) {
+          this.ATTR_CATEGORY = productCategory;
+        }
       }
     );
   }

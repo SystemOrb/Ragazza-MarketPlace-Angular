@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './products/product.service';
 import { AuthService } from './auth/auth.service';
 import { ModalService } from './modal/modal.service';
+import { AuthorService } from './products/author.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +15,8 @@ import { ModalService } from './modal/modal.service';
   providers: [
     AuthService,
     ProductService,
-    ModalService
+    ModalService,
+    AuthorService
   ]
 })
 export class ServicesModule { }

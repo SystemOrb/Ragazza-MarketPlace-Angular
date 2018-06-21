@@ -15,14 +15,22 @@
         <h4 class="card-title">Galeria de imagenes de este producto</h4>
         <h6 class="card-subtitle m-b-20 text-muted">Agrega las imagenes que deseas mostrar en la tienda</h6>
     </div>
-    <div *ngFor="let images of arrayImagenes" class="col-lg-3 col-md-6">
+    <div *ngFor="let images of arrayImagenes; let i = index;" class="col-lg-3 col-md-6">
         <div class="card">
             <div class="el-card-item">
                 <div class="el-card-avatar el-overlay-1"> <img [src]="'http://ragazzashop.com/ragazza_backend/image/' + images.image" alt="user" />
                     <div class="el-overlay">
                         <ul class="el-info">
-                            <li><a class="btn default btn-outline image-popup-vertical-fit"><i class="icon-pencil"></i></a></li>
-                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-trash"></i></a></li>
+                            <li>
+                                <button type="button" (click)="getImageId(images, i)" class="btn default btn-outline image-popup-vertical-fit">
+                                    <i class="icon-pencil"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button (click)="deleteItem(images, i)" type="button" class="btn default btn-outline">
+                                    <i class="icon-trash"></i>
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>

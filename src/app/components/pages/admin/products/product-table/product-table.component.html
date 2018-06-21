@@ -38,27 +38,39 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let tableData of TABLE; let i = index;">
                             <tr>
                                 <td>
                                     <a href="javascript:void(0)">
-                                        <img src="../assets/images/users/1.jpg" alt="user" style="width:70px" class="img-circle img-thumbnail" />
+                                        <img [src]="imagesUrl + tableData.image" alt="user" style="width:70px" class="img-circle img-thumbnail" />
                                     </a>
                                 </td>
-                                <td>Anika. MultiColors</td>
-                                <td>Anika</td>
+                                <td>
+                                    {{ tableData.name.name }}
+                                </td>
+                                <td>
+                                    {{ tableData.model }}
+                                </td>
 
-                                <td>$120</td>
-                                <td>100</td>
-                                <td><span class="label label-warning">Disponible</span> </td>
+                                <td>
+                                    {{ tableData.price }}
+                                </td>
+                                <td>
+                                    {{ tableData.quantity }}
+                                </td>
+                                <td>
+                                    <span *ngIf="tableData.status" class="label label-warning">Disponible</span>
+                                    <span *ngIf="!tableData.status" class="label label-danger">Desactivado</span>
+
+                                </td>
                                 <td>
                                     <!--<button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete">
                                       asdasd
                                     </button>-->
-                                    <button class="btn btn-primary">
+                                    <button (click)="editItem(tableData)" class="btn btn-primary">
                                       <span class="ti-pencil"></span>
                                     </button>
-                                    <button style="margin-left: 3px" class="btn btn-secondary">
+                                    <button (click)="deleteItem(tableData, i)" style="margin-left: 3px" class="btn btn-secondary">
                                         <span class="ti-trash"></span>
                                       </button>
                                 </td>

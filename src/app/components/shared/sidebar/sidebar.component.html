@@ -6,8 +6,8 @@
             <ul id="sidebarnav">
                 <li class="user-profile">
                     <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
-                        <img src="../assets/images/users/profile.png" alt="user" />
-                        <span class="hide-menu">Steave Jobs </span>
+                        <img [src]="URL + _user.userShop.shop_photo" alt="user" />
+                        <span class="hide-menu"> {{ _user.userShop.shop_name }} </span>
                     </a>
                 </li>
                 <li class="nav-devider"></li>

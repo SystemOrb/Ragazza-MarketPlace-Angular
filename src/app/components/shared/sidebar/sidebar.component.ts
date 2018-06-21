@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth/auth.service';
+import { PHOTO_SERVICES } from '../../../config/config';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class SidebarComponent implements OnInit {
-
-  constructor() { }
+  URL = PHOTO_SERVICES + '/';
+  constructor(public _user: AuthService) { }
 
   ngOnInit() {
   }

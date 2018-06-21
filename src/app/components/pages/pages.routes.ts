@@ -20,6 +20,7 @@ import { BalanceComponent } from './balance/balance.component';
 import { InvoiceComponent } from './admin/orders/invoice.component';
 import { VerifyLoginGuard } from '../../GUARDS/verify-login.guard';
 import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
+import { ProductAuthorGuard } from '../../GUARDS/product-author.guard';
 
 
 
@@ -34,14 +35,42 @@ const routes: Routes = [
        {path: 'sellers', component: SellersComponent, data: {title: 'Historial de ventas'}},
        {path: 'balance', component: BalanceComponent, data: {title: 'Balance'}},
        {path: 'products', component: ProductTableComponent, data: {title: 'Mis productos publicados'}},
-       {path: 'product-info/:id', component: ProductDescriptionComponent, data: {title: 'Información del producto'}},
-       {path: 'product-data/:id', component: ProductDataComponent, data: {title: 'Datos del producto'}},
-       {path: 'product-help/:id', component: ProductAttributesComponent, data: {title: 'Datos de busqueda del producto'}},
-       {path: 'filters/:id', component: FilterTableComponent, data: {title: 'Filtros de busqueda del producto'}},
-       {path: 'product-discount/:id', component: ProductDiscountComponent, data: {title: 'Datos de descuento del producto'}},
-       {path: 'product-special/:id', component: ProductSpecialComponent, data: {title: 'Oferta especial del producto'}},
-       {path: 'product-images/:id', component: ProductImagesComponent, data: {title: 'Imagenes del producto'}}
-     ]},
+       {path: 'product-info/:id',
+       canActivate: [ProductAuthorGuard],
+        component: ProductDescriptionComponent,
+         data: {title: 'Información del producto'}
+        },
+       {path: 'product-data/:id',
+        canActivate: [ProductAuthorGuard],
+         component: ProductDataComponent,
+          data: {title: 'Datos del producto'}
+        },
+       {path: 'product-help/:id',
+        canActivate: [ProductAuthorGuard],
+         component: ProductAttributesComponent,
+          data: {title: 'Datos de busqueda del producto'}
+        },
+       {path: 'filters/:id',
+        canActivate: [ProductAuthorGuard],
+         component: FilterTableComponent,
+          data: {title: 'Filtros de busqueda del producto'}
+        },
+       {path: 'product-discount/:id',
+        canActivate: [ProductAuthorGuard],
+         component: ProductDiscountComponent,
+          data: {title: 'Datos de descuento del producto'}
+        },
+       {path: 'product-special/:id',
+        canActivate: [ProductAuthorGuard],
+         component: ProductSpecialComponent,
+          data: {title: 'Oferta especial del producto'}
+        },
+       {path: 'product-images/:id',
+        canActivate: [ProductAuthorGuard],
+         component: ProductImagesComponent,
+          data: {title: 'Imagenes del producto'}
+        },
+      ]},
 
     { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
 

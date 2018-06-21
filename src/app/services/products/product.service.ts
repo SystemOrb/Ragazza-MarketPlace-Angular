@@ -178,9 +178,9 @@ export class ProductService {
   const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
   return this._http.post(url, objectForm).pipe(
    map( (response: any) => {
-     console.log(response);
+     return response;
    }), catchError( (err: Observable<string | Boolean>) => {
-     console.log(err);
+      console.error(err);
      return new Observable<string | boolean>();
    }),
  );
@@ -296,12 +296,14 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
    /**************************************************************
    * IMAGES
    ***************************************************************/
-    addImageToProduct(_imageData: ProductImages) {
+    addImageToProduct(_imageData: ProductImages, operationType: string) {
       const objectImage = new FormData();
       objectImage.append('product_id', _imageData.product_id);
       objectImage.append('image', _imageData.image);
       objectImage.append('product_image_id', _imageData.product_image_id);
-      const url = HTTP_SERVICE + '/products.php?operationType=insertImage';
+      objectImage.append('index', _imageData.index);
+      objectImage.append('operationType', _imageData.operationType);
+      const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
       return this._http.post(url, objectImage).pipe(
         map( (imageResp: any) => {
           return imageResp;
@@ -337,6 +339,19 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
   getDBById(_key: string | number, search: string) {
     let url = HTTP_SERVICE + '/products.php?operationType=';
     url += search + '&product_id=' + _key;
+    return this._http.get(url).pipe(
+      map( (response: any)  => {
+        return response;
+      }),
+      catchError( (err: Observable<string | Boolean>) => {
+        console.log(err);
+        return new Observable<string | boolean>();
+      }),
+    );
+  }
+  getByUSER(_userKey: string | number, search: string) {
+    let url = HTTP_SERVICE + '/products.php?operationType=';
+    url += search + '&user_id=' + _userKey;
     return this._http.get(url).pipe(
       map( (response: any)  => {
         return response;

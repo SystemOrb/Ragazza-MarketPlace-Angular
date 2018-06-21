@@ -4,6 +4,7 @@ import { ProductDescription } from '../../../../../../models/products/product-de
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../../../../../services/auth/auth.service';
+import { AuthorService } from '../../../../../../services/products/author.service';
 declare const swal: any;
 @Component({
   selector: 'app-product-description',
@@ -12,13 +13,16 @@ declare const swal: any;
 })
 export class ProductDescriptionComponent implements OnInit {
   constructor(private _product: ProductService, private _param: ActivatedRoute,
-  private _user: AuthService, private _route: Router) {
+  private _user: AuthService, private _route: Router, private _guard: AuthorService) {
     this._param.params.subscribe( (response: any) => {
       if (response['id'] === 'nuevo') {
         this._product.navigationUrl = 'nuevo';
+        this._guard.canView = true;
         this._product.navigation = false;
       } else {
         this._product.navigationUrl = response['id'];
+        this._guard.ID_GUARD = response['id'];
+        this._guard.canView = false;
         this._product.navigation = true;
       }
     });

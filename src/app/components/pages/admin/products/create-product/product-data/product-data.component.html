@@ -9,8 +9,9 @@
                     <div class="col-12">
                         <code>*</code><label>imagen del producto<span class="help"></span></label>
                         <div class="col-4">
-                            <img *ngIf="!imagePreview" class="img-fluid img-thumbnail" [src]=" null | images" alt="">
-                            <img *ngIf="imagePreview" class="img-fluid img-thumbnail" [src]="imagePreview" alt="">
+                            <img *ngIf="!imagePreview && !canView" class="img-fluid img-thumbnail" [src]=" null | images">
+                            <img *ngIf="imagePreview" class="img-fluid img-thumbnail" [src]="imagePreview">
+                            <img *ngIf="canView && !imagePreview" class="img-fluid img-thumbnail" [src]="canView">
                         </div>
                         <div style="margin-top:-2em" class="col-8">
                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">

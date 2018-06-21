@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
+import { PHOTO_SERVICES } from '../../../config/config';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +8,8 @@ import { AuthService } from '../../../services/auth/auth.service';
   styles: []
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private _user: AuthService) { }
+  URL: string = PHOTO_SERVICES + '/';
+  constructor(public _user: AuthService) { }
 
   ngOnInit() {
   }

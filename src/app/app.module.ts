@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_ROUTES } from './app.routes';
 import { ServicesModule } from './services/services.module';
 import { VerifyLoginGuard } from './GUARDS/verify-login.guard';
+import { ProductAuthorGuard } from './GUARDS/product-author.guard';
 
 
 
@@ -27,7 +28,8 @@ import { VerifyLoginGuard } from './GUARDS/verify-login.guard';
     ServicesModule
   ],
   providers: [
-    VerifyLoginGuard
+    VerifyLoginGuard,
+    ProductAuthorGuard
   ],
   bootstrap: [AppComponent]
 })

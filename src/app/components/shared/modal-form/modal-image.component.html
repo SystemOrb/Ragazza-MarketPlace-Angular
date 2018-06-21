@@ -12,8 +12,9 @@
                     <div class="col-12">
                         <code>*</code><label>Agregar una imagen<span class="help"></span></label>
                         <div class="col-4">
-                            <img *ngIf="!ImagePreview" class="img-fluid img-thumbnail" [src]=" null | images" alt="">
-                            <img *ngIf="ImagePreview" class="img-fluid img-thumbnail" [src]="ImagePreview" alt="">
+                            <img *ngIf="!ImagePreview && (!_modal.canUpdate)" class="img-fluid img-thumbnail" [src]=" null | images" alt="">
+                            <img *ngIf="ImagePreview" class="img-fluid img-thumbnail" [src]="ImagePreview">
+                            <img *ngIf="_modal.canUpdate && !ImagePreview" class="img-fluid img-thumbnail" [src]="_modal.imagePreview">
                         </div>
                         <div style="margin-top:-2em" class="col-8">
                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">
@@ -33,6 +34,11 @@
                         </div>
                         <fieldset style="display:none">
                             <input formControlName="product_id" type="hidden" name="product_id">
+                            <div *ngIf="_modal.canUpdate">
+                                <input type="hidden" formControlName="product_image_id" name="product_image_id">
+                                <input type="hidden" formControlName="index" name="index">
+                                <input type="hidden" formControlName="operationType" name="OperationType">
+                            </div>
                         </fieldset>
                     </div>
                 </form>

@@ -12,6 +12,14 @@ export class ModalService {
   collection;
   offer: ProductOffers;
   imagePopup: boolean = false;
+  /*
+  PROPIEDADES PARA EDITAR LA IMAGEN
+  */
+ public canUpdate: boolean = false;
+ public imagePreview: string | File = '';
+ public product_image_id: string | Blob = '';
+ public indexImage: number;
+ public operationType: string;
   /**************************************************************
    * PARA LOS DESCUENTOS
    ***************************************************************/
@@ -33,14 +41,31 @@ export class ModalService {
    * IMAGES
    ***************************************************************/
    insertImage(imageData: ProductImages) {
-     this._product.addImageToProduct(imageData).subscribe(
+     this._product.addImageToProduct(imageData, 'insertImage').subscribe(
        (resp: any) => {
-         this.refreshTable.emit(resp);
-         swal('Mensaje', 'Imagen agregada con éxito', 'success');
-         this.imagePopup = false;
-         console.log(resp);
+        swal('Mensaje', 'Imagen agregada con éxito', 'success');
+        this.imagePopup = false;
+         return this.refreshTable.emit(resp);
+         // console.log(resp);
        }
      );
+   }
+   updateImage(imageData: ProductImages) {
+     this._product.addImageToProduct(imageData, 'updateImages').subscribe(
+      (resp: any) => {
+        swal('Mensaje', 'Imagen actualizada con éxito', 'success');
+        this.imagePopup = false;
+        return this.refreshTable.emit(resp);
+      }
+     );
+   }
+   deleteImage(imageData: ProductImages) {
+    this._product.addImageToProduct(imageData, 'deleteImageProduct').subscribe(
+      (resp: any) => {
+        this.imagePopup = false;
+        return this.refreshTable.emit(resp);
+      }
+    );
    }
    /**************************************************************
    * END IMAGES

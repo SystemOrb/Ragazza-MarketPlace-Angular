@@ -11,6 +11,8 @@ import { LengthType } from '../../../../../../models/filters/length.class';
 import { WeightType } from '../../../../../../models/filters/weight.class';
 import { StatusType } from '../../../../../../models/filters/status.class';
 import { StockType } from '../../../../../../models/filters/stock.class';
+import { AuthorService } from '../../../../../../services/products/author.service';
+import { PHOTO_SERVICES } from '../../../../../../config/config';
 /************************************************************************
  * END MODELOS
  ************************************************************************/
@@ -26,6 +28,7 @@ export class ProductDataComponent implements OnInit {
   profileImage: File;
   loading: boolean = false;
   canUpdate: boolean = false; // Variables que nos indicará si es de tipo Insert o Update
+  canView: string;
   /* Items Dinamicos*/
    length: LengthType[] = [];
    weight: WeightType[] = [];
@@ -37,14 +40,18 @@ export class ProductDataComponent implements OnInit {
    */
   formData: ProductData;
   constructor(private _product: ProductService, private _param: ActivatedRoute,
-    private _user: AuthService, private _route: Router) {
+    private _user: AuthService, private _route: Router,
+    private _guard: AuthorService) {
       this._param.params.subscribe( (response: any) => {
         if (response['id'] === 'nuevo') {
           this._product.navigationUrl = 'nuevo';
+          this._guard.canView = true;
           this.canUpdate = false;
           this._product.navigation = false;
         } else {
           this._product.navigationUrl = response['id'];
+          this._guard.ID_GUARD = response['id'];
+          this._guard.canView = false;
           this.canUpdate = true;
           this._product.navigation = true;
         }
@@ -60,6 +67,11 @@ export class ProductDataComponent implements OnInit {
     this.lengthType();
     this.weightType();
     if (this.canUpdate) {
+      this.getImage().then(
+        (Image: any) => this.canView = PHOTO_SERVICES + '/' + Image.image
+      ).catch(
+        (err: any) => console.error(err)
+      );
       this.setForm();
     }
     this.form = new FormGroup({
@@ -267,5 +279,16 @@ export class ProductDataComponent implements OnInit {
       }
     }
   );
+  }
+  getImage(): Promise<any> {
+    return new Promise( (resolve, reject) => {
+      this._product.getDBById(this._product.navigationUrl, 'selectData').subscribe(
+        (image: any) => {
+          for (const objectImage of image) {
+            resolve(objectImage);
+          }
+        }
+      );
+    });
   }
 }

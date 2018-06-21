@@ -14,28 +14,50 @@ export class ModalImageComponent implements OnInit {
   Image: File;
   ImagePreview: string;
   loading: boolean = false;
-  constructor(private _product: ProductService, private _modal: ModalService) { }
+  constructor(private _product: ProductService, public _modal: ModalService) {
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
       image: new FormControl(null, [Validators.required]),
-      product_id: new FormControl(this._product.navigationUrl, [Validators.required])
+      product_id: new FormControl(this._product.navigationUrl, [Validators.required]),
+      product_image_id: new FormControl(this._modal.product_image_id),
+      index: new FormControl(this._modal.indexImage),
+      operationType: new FormControl(this._modal.operationType)
     });
   }
  sendForm() {
    if (!this.form.valid) {
      return;
    }
-   this.loading = true;
-   const objectImage = new ProductImages(
-     this.form.value.product_id,
-     this.Image
-   );
-   this._modal.insertImage(objectImage);
-   this._product.modal = false;
-   this.ImagePreview = null;
-   this.form.value.image = '';
-   this.loading = false;
+   if (this._modal.canUpdate) { // update
+      this.loading = true;
+      this.form.value.product_image_id = this._modal.product_image_id;
+      this.form.value.index = this._modal.indexImage;
+      this.form.value.operationType = this._modal.operationType;
+      const objectImage_ = new ProductImages(
+        this.form.value.product_id,
+        this.Image,
+        this.form.value.product_image_id,
+        null,
+        this.form.value.index,
+        this.form.value.operationType
+      );
+      this._modal.updateImage(objectImage_);
+      this.loading = false;
+   } else {
+     // iNSERT
+    this.loading = true;
+    const objectImage = new ProductImages(
+      this.form.value.product_id,
+      this.Image
+    );
+    this._modal.insertImage(objectImage);
+    this._product.modal = false;
+    this.ImagePreview = null;
+    this.form.value.image = '';
+    this.loading = false;
+   }
  }
  closeModal() {
    this._modal.imagePopup = false;
