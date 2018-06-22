@@ -8,6 +8,7 @@ export class ProductDescription {
         public user_id?: string | Blob,
         public meta_description?: string,
         public meta_keyword?: string,
-        public meta_tags?: string
+        public meta_tags?: string,
+        public image?: string
     ) {}
 }

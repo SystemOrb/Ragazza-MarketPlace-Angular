@@ -1,0 +1,28 @@
+<div class="card-title">
+    <h3 class="align-content-center">
+        <span style="text-align: center">
+            Busqueda: <strong>{{ QUERY }}</strong>
+        </span>
+    </h3>
+</div>
+<div class="row">
+
+    <!-- Column -->
+    <div *ngFor="let items of ITEMS" class="col-lg-4">
+        <div class="card">
+            <img class="card-img-top img-responsive" [src]="items.image" [alt]="items.name">
+
+            <div class="card-body">
+                <ul class="list-inline font-14">
+                    <li class="p-l-0">{{ items.tag }}</li>
+                </ul>
+                <h3 class="font-normal"> {{ items.name }} </h3>
+                <p class="m-b-0 m-t-10">
+                    {{ items.description }}
+                </p>
+                <a [routerLink]="['/product-data', items.product_id]" class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+</div>

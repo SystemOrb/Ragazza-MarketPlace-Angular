@@ -21,6 +21,7 @@ import { InvoiceComponent } from './admin/orders/invoice.component';
 import { VerifyLoginGuard } from '../../GUARDS/verify-login.guard';
 import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
 import { ProductAuthorGuard } from '../../GUARDS/product-author.guard';
+import { SearchProductComponent } from './admin/products/search-product/search-product.component';
 
 
 
@@ -39,6 +40,11 @@ const routes: Routes = [
        canActivate: [ProductAuthorGuard],
         component: ProductDescriptionComponent,
          data: {title: 'Información del producto'}
+        },
+        {
+          path: 'search/:query',
+          component: SearchProductComponent,
+          data: {title: 'Buscador de productos'}
         },
        {path: 'product-data/:id',
         canActivate: [ProductAuthorGuard],

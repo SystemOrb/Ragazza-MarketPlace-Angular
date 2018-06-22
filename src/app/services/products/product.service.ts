@@ -11,6 +11,7 @@ import { ProductDescription } from '../../models/products/product-description.cl
 import { ProductAttributes } from '../../models/products/product-attr.class';
 import { ProductOffers } from '../../models/products/product-discount.class';
 import { ProductImages } from '../../models/products/product-images.class';
+import { SearchProducts } from '../../models/products/product-search.class';
 
 
 @Injectable({
@@ -364,5 +365,26 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
   }
    /**************************************************************
    * END GETTERS
+   ***************************************************************/
+     /**************************************************************
+   * FIND PRODUCTS
+   ***************************************************************/
+     findProducts(search: SearchProducts, operationType: string) {
+        const ObjectSearch = new FormData();
+        ObjectSearch.append('user_id', search.user_id);
+        ObjectSearch.append('name', search.name);
+        const url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
+        return this._http.post(url, ObjectSearch).pipe(
+          map( (response: any)  => {
+            return response;
+          }),
+          catchError( (err: Observable<string | Boolean>) => {
+            console.log(err);
+            return new Observable<string | boolean>();
+          }),
+        );
+     }
+   /**************************************************************
+   * END BUSCADOR
    ***************************************************************/
 }

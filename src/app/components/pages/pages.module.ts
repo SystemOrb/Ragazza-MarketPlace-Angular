@@ -19,6 +19,7 @@ import { ProductAttributesComponent } from './admin/products/create-product/prod
 import { ProductDiscountComponent } from './admin/products/create-product/product-discount/product-discount.component';
 import { ProductSpecialComponent } from './admin/products/create-product/product-special/product-special.component';
 import { ProductImagesComponent } from './admin/products/create-product/product-images/product-images.component';
+import { SearchProductComponent } from './admin/products/search-product/search-product.component';
 import { SellersComponent } from './sellers/sellers.component';
 import { BalanceComponent } from './balance/balance.component';
 import { InvoiceComponent } from './admin/orders/invoice.component';
@@ -46,6 +47,7 @@ import { FilterTableComponent } from './admin/products/create-product/product-at
       ProductDiscountComponent,
       ProductSpecialComponent,
       ProductImagesComponent,
+      SearchProductComponent,
       FilterTableComponent,
       SellersComponent,
       BalanceComponent,
