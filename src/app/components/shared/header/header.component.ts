@@ -4,7 +4,6 @@ import { PHOTO_SERVICES } from '../../../config/config';
 import { SearchService } from '../../../services/products/search.service';
 import { SearchProducts } from '../../../models/products/product-search.class';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

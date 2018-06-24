@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { PHOTO_SERVICES } from '../../../config/config';
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',

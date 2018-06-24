@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import swal from 'sweetalert';
 import { UserShop } from '../../../models/empresas.class';
 import { AuthService } from '../../../services/auth/auth.service';
+declare function init_plugins();
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -46,6 +47,7 @@ export class RegisterComponent implements OnInit {
       };
     }
   ngOnInit() {
+    init_plugins();
   }
   registerNewShop() {
 
@@ -62,7 +64,18 @@ export class RegisterComponent implements OnInit {
       this.form.controls['shop_address'].value,
       this.form.controls['shop_phone'].value
     );
-    this._user.registerNewUser(newUserShop).subscribe();
+    this._user.registerNewUser(newUserShop).subscribe(
+      (authData: any) => {
+        if (authData.status) {
+          // Iniciamos sesión
+          setTimeout( ()  => {
+            this._user.loginUser(new UserShop(
+               authData.data.shop_email,
+               authData.data.shop_password)).subscribe();
+          }, 500);
+        }
+      }
+    );
   }
 
 }

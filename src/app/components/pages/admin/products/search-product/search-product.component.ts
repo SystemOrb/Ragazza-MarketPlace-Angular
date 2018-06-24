@@ -6,7 +6,7 @@ import { PHOTO_SERVICES } from '../../../../../config/config';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { ProductService } from '../../../../../services/products/product.service';
 import { SearchProducts } from '../../../../../models/products/product-search.class';
-declare function init_plugins();
+// declare function init_plugins();
 @Component({
   selector: 'app-search-product',
   templateUrl: './search-product.component.html',
@@ -22,7 +22,7 @@ export class SearchProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     this.param.params.subscribe(
       (get: any) => {
         this.QUERY = get['query'];

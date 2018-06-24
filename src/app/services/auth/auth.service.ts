@@ -40,7 +40,8 @@ export class AuthService {
           }
           this.saveStorage(response.email, response.customer_type,
           response.address, response.id, response.phone, response.realname, response.photo);
-          this.route.navigate(['/profile']);
+           this.route.navigate(['/profile']);
+          // window.location.href = '/products';
         }),
         catchError( (err: any)  => {
           console.error(err);
@@ -103,6 +104,7 @@ export class AuthService {
         swal('Ops!', response.message, 'warning');
         return;
       }
+       return response;
     }),
     catchError( (err: Observable<string | boolean>) => {
       console.error(err);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserShop } from '../../../models/empresas.class';
+declare function init_plugins();
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
       });
    }
   ngOnInit() {
+    init_plugins();
   }
   authUser() {
     if (!this.form.valid) {

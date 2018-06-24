@@ -85,12 +85,17 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img [src]="URL + _user.userShop.shop_photo" alt="user" class="profile-pic" /></a>
+                        <img *ngIf="_user.userShop.shop_photo" [src]="URL + _user.userShop.shop_photo" alt="user" class="profile-pic" />
+                        <img *ngIf="!_user.userShop.shop_photo" [src]="URL + '/no_image.png'" alt="user" class="profile-pic" />
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img [src]="URL + _user.userShop.shop_photo" alt="user"></div>
+                                    <div class="u-img">
+                                        <img *ngIf="_user.userShop.shop_photo" [src]="URL + _user.userShop.shop_photo" alt="user">
+                                        <img *ngIf="!_user.userShop.shop_photo" [src]="URL + '/no_image.png'" alt="user">
+                                    </div>
                                     <div class="u-text">
                                         <h4>{{ _user.userShop.shop_name }}</h4>
                                         <p class="text-muted"> {{ _user.userShop.shop_email }} </p>

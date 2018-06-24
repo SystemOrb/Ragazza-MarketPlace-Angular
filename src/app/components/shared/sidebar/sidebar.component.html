@@ -6,7 +6,8 @@
             <ul id="sidebarnav">
                 <li class="user-profile">
                     <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
-                        <img [src]="URL + _user.userShop.shop_photo" alt="user" />
+                        <img *ngIf="_user.userShop.shop_photo" [src]="URL + _user.userShop.shop_photo" alt="user" />
+                        <img *ngIf="!_user.userShop.shop_photo" [src]="URL + '/no_image.png'" alt="user" />
                         <span class="hide-menu"> {{ _user.userShop.shop_name }} </span>
                     </a>
                 </li>
