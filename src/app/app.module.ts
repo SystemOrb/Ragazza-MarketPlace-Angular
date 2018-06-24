@@ -17,6 +17,8 @@ import { PagesComponent } from './components/pages/pages.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
+import { CheckoutComponent } from './components/pages/payments/checkout/checkout.component';
+import { PayloadComponent } from './components/pages/payments/checkout/payload.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
     PagesComponent,
     LoginComponent,
     RegisterComponent,
+    CheckoutComponent,
+    PayloadComponent,
     NotFoundComponent,
   ],
   imports: [

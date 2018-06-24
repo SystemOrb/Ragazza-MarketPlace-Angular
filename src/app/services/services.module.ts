@@ -7,6 +7,7 @@ import { AuthService } from './auth/auth.service';
 import { ModalService } from './modal/modal.service';
 import { AuthorService } from './products/author.service';
 import { SearchService } from './products/search.service';
+import { PlacetopayService } from './payment/placetopay.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +19,8 @@ import { SearchService } from './products/search.service';
     ProductService,
     ModalService,
     AuthorService,
-    SearchService
+    SearchService,
+    PlacetopayService
   ]
 })
 export class ServicesModule { }
