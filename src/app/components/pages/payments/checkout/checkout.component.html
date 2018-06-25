@@ -16,16 +16,16 @@
                               <br> Bhavnagar - 364002</p>
                       </address>
                         <h3>Rellena estos campos</h3>
-                        <form class="form-material">
+                        <form #f="ngForm" (ngSubmit)="sendForm(f)" id="checkout" class="form-material">
                             <div class="form-group">
-                                <select class="form-control">
-                              <option selected disabled value="null">Selecciona un tipo de documento</option>
-                              <option value="ruc">RUC</option>
+                                <select [(ngModel)]="documentType" name="documentType" required class="form-control">
+                              <option  selected disabled value="">Selecciona un tipo de documento</option>
+                              <option value="DNI">DNI</option>
                               <option value="CI">Cédula de identidad</option>
                             </select>
                             </div>
                             <div class="form-group">
-                                <input placeholder="Número de documento" class="form-control">
+                                <input [(ngModel)]="document" name="document" required placeholder="Número de documento" class="form-control">
                             </div>
                         </form>
                     </div>
@@ -84,8 +84,8 @@
                     </div>
                     <div class="clearfix"></div>
                     <hr>
-                    <div class="text-right">
-                        <button class="btn btn-danger" type="submit"> Proceed to payment </button>
+                    <div style="margin-top:-5em" class="text-right">
+                        <button form="checkout" class="btn btn-danger" type="submit"> Proceed to payment </button>
                         <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
                     </div>
                 </div>

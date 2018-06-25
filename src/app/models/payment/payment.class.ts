@@ -6,9 +6,9 @@ export class Payment {
     constructor(
         public reference: string,
         public description: string,
-        public amount: Amount,
-        public items: Items[],
-        public shipping: Shipping,
-        public allowPartial: boolean
+        public amount: Amount | any,
+        public items: Items[] | any,
+        public shipping: Shipping | any,
+        public allowPartial: boolean | any
     ) {}
 }

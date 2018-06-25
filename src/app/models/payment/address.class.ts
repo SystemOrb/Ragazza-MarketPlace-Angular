@@ -5,6 +5,6 @@ export class UserAddress {
         public state: string,
         public postalcode: string,
         public country: string,
-        public phone: string | number
+        public phone: string | Blob
     ) {}
 }

@@ -5,6 +5,8 @@ export class Items {
         public category: string,
         public qty: string,
         public price: string | number,
-        public tax?: string | number
+        public tax?: string | number,
+        public reference?: string,
+        public description?: string
     ) {}
 }
