@@ -84,8 +84,8 @@ export class FilterTableComponent implements OnInit {
       }
     );
   }
-  updateFilter(output: ProductAttributes) {
-    this._product.updatesOpencartItem(output, 'updateFilter').subscribe(
+  updateFilter(output: ProductAttributes, operationType: string) {
+    this._product.updatesOpencartItem(output, operationType).subscribe(
       (response: any) => {
         if (response.status) {
           swal('Filtro Actualizado con éxito');
@@ -93,5 +93,34 @@ export class FilterTableComponent implements OnInit {
         console.log(response);
       }
     );
+  }
+  deleteFilter(output: ProductAttributes, index: number,
+     inputType: string, operationType: string, toRemove: string) {
+    swal({
+      title: 'Confirmación',
+      text: '¿Estás seguro que deseas eliminar este/a ' + inputType + '?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willSend) => {
+      if (willSend) {
+        this._product.updatesOpencartItem(output, operationType).subscribe(
+          (response: any) => {
+            if (response.status) {
+              swal('Mensaje', 'Has removido un filtro!', 'success');
+              if (toRemove === 'category') {
+                this.ATTR_CATEGORY.splice(index, 1);
+                return;
+              }
+              if (toRemove === 'filter') {
+                this.ATTR_FILTER.splice(index, 1);
+                return;
+              }
+            }
+          }
+        );
+      }
+    });
   }
 }

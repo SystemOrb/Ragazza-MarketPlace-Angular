@@ -22,6 +22,7 @@ import { VerifyLoginGuard } from '../../GUARDS/verify-login.guard';
 import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
 import { ProductAuthorGuard } from '../../GUARDS/product-author.guard';
 import { SearchProductComponent } from './admin/products/search-product/search-product.component';
+import { RefreshComponent } from './refresh/refresh.component';
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes = [
        {path: 'sellers', component: SellersComponent, data: {title: 'Historial de ventas'}},
        {path: 'balance', component: BalanceComponent, data: {title: 'Balance'}},
        {path: 'products', component: ProductTableComponent, data: {title: 'Mis productos publicados'}},
+       {path: 'refresh/:id/:toURL', component: RefreshComponent, data: {title: 'Refrescador'}},
        {path: 'product-info/:id',
        canActivate: [ProductAuthorGuard],
         component: ProductDescriptionComponent,

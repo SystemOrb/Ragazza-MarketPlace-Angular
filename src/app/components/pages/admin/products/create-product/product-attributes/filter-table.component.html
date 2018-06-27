@@ -25,7 +25,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 301px;"></th>
                             </tr>
                         </thead>
-                        <tbody *ngFor="let filterData_ of ATTR_FILTER">
+                        <tbody *ngFor="let filterData_ of ATTR_FILTER; let i = index;">
                             <tr role="row" class="odd">
                                 <td>
                                     <div class="form-material">
@@ -40,11 +40,11 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary">
+                                    <!--<button (click)="updateFilter(filterData_, 'updateFilter')" class="btn btn-primary">
                                           <span class="fa fa-save"></span>
-                                    </button>
-                                    <button style="margin-left:5px" class="btn btn-danger">
-                                                       <span class="fa fa-trash-o"></span> 
+                                    </button>-->
+                                    <button (click)="deleteFilter(filterData_, i, 'Filtro', 'deleteFilter', 'filter')" style="margin-left:5px" class="btn btn-danger">
+                                    <span class="fa fa-trash-o"></span> 
                                     </button>
                                 </td>
                             </tr>
@@ -71,7 +71,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 301px;"></th>
                             </tr>
                         </thead>
-                        <tbody *ngFor="let categoryData_ of ATTR_CATEGORY">
+                        <tbody *ngFor="let categoryData_ of ATTR_CATEGORY; let i = index">
                             <tr role="row" class="odd">
                                 <td>
                                     <div class="form-material">
@@ -86,12 +86,12 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary">
+                                    <!--<button class="btn btn-primary">
                                           <span class="fa fa-save"></span>
-                                    </button>
-                                    <button style="margin-left:5px" class="btn btn-danger">
-                                                       <span class="fa fa-trash-o"></span> 
-                                                      </button>
+                                    </button>-->
+                                    <button (click)="deleteFilter(categoryData_, i, 'Categoría', 'deleteCategory', 'category')" style="margin-left:5px" class="btn btn-danger">
+                                         <span class="fa fa-trash-o"></span> 
+                                     </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -24,6 +24,7 @@ import { SellersComponent } from './sellers/sellers.component';
 import { BalanceComponent } from './balance/balance.component';
 import { InvoiceComponent } from './admin/orders/invoice.component';
 import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
+import { RefreshComponent } from './refresh/refresh.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { FilterTableComponent } from './admin/products/create-product/product-at
       SellersComponent,
       BalanceComponent,
       InvoiceComponent,
+      RefreshComponent
     ],
     exports: [
     ],

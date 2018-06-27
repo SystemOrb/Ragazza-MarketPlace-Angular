@@ -34,6 +34,7 @@ export class ProductImagesComponent implements OnInit {
     this.loadTable();
     this._modal.refreshTable.subscribe(
       (resp: any) => {
+        console.log(resp);
         if (resp.data.operationType === 'update') { // Significa que fue una actualización
             // Actualiza la imagen vieja por la nueva a tiempo real
             const temporalImage = '/catalog/ropa/' + resp.path; // IMAGEN TEMPORAL
@@ -54,6 +55,10 @@ export class ProductImagesComponent implements OnInit {
           this._modal.canUpdate = false;
           this._modal.imagePreview = '';
           this._modal.product_image_id = '';
+          this._param.params.subscribe( (get: any) => {
+            // window.location.href = '/product-images/' + get['id'];
+            this._route.navigate(['/refresh', get['id'], 'product-images']);
+          });
         }
       }
     );
