@@ -387,4 +387,23 @@ DeleteProductDiscount(dataProduct: ProductOffers, operationType: string) {
    /**************************************************************
    * END BUSCADOR
    ***************************************************************/
+  /**************************************************************
+   * CONTADORES
+   ***************************************************************/
+     getCountItems(_key: string | number, operationType: string) {
+       let url = HTTP_SERVICE + '/products.php?operationType=' + operationType;
+       url += '&emp_id=' + _key;
+       return this._http.get(url).pipe(
+        map( (response: any)  => {
+          return response;
+        }),
+        catchError( (err: Observable<string | Boolean>) => {
+          console.log(err);
+          return new Observable<string | boolean>();
+        }),
+      );
+     }
+  /**************************************************************
+   * FIN CONTADORES
+   ***************************************************************/
 }

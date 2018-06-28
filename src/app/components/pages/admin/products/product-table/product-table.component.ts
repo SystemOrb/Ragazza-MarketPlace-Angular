@@ -14,6 +14,8 @@ declare const swal: any;
 export class ProductTableComponent implements OnInit {
   TABLE: ProductsTable[] = [];
   imagesUrl = PHOTO_SERVICES + '/';
+  itemsPosted: number = 0;
+  itemsSells: number = 0;
   constructor(private _product: ProductService,
      private _user: AuthService, private _route: Router) { }
 
@@ -28,6 +30,9 @@ export class ProductTableComponent implements OnInit {
         return;
       }
     );
+    // CONTADORES
+    this.getQtyItems();
+    this.getSells();
   }
   /*
   Función IMPORTANTISIMA
@@ -83,6 +88,7 @@ export class ProductTableComponent implements OnInit {
           (removed: any) => {
             if (removed.status) {
               this.TABLE.splice(index, 1);
+              this.itemsPosted = (this.itemsPosted - 1);
             }
           }
         );
@@ -91,5 +97,17 @@ export class ProductTableComponent implements OnInit {
   }
   editItem(URL_ID: ProductsTable) {
     this._route.navigate(['product-info', URL_ID.product_id]);
+  }
+  getQtyItems() {
+    this._product.getCountItems(this._user.user_id, 'countItems')
+    .subscribe(
+      (flag: any) => this.itemsPosted = flag.total
+    );
+  }
+  getSells() {
+    this._product.getCountItems(this._user.user_id, 'countSell')
+    .subscribe(
+      (flag: any) => this.itemsSells = flag.total
+    );
   }
 }

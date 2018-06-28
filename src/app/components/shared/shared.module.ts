@@ -14,6 +14,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { LinksComponent } from './links/links.component';
 import { ModalImageComponent } from './modal-form/modal-image.component';
 import { ImagesPipe } from '../../pipes/images.pipe';
+import { PushComponent } from './push/push.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { ImagesPipe } from '../../pipes/images.pipe';
     LinksComponent,
     ModalFormComponent,
     ModalImageComponent,
-    ImagesPipe
+    ImagesPipe,
+    PushComponent
   ], exports: [
     HeaderComponent,
     FooterComponent,
@@ -41,7 +43,8 @@ import { ImagesPipe } from '../../pipes/images.pipe';
     LinksComponent,
     ModalFormComponent,
     ModalImageComponent,
-    ImagesPipe
+    ImagesPipe,
+    PushComponent
   ]
 })
 export class SharedModule { }

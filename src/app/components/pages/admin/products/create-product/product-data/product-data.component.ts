@@ -187,7 +187,8 @@ export class ProductDataComponent implements OnInit {
                   this._product.productDescription = null;
                   this._product.productData = null;
                   this.loading = false;
-                  this._route.navigate(['/product-info', response.data]);
+                  // this._route.navigate(['/product-info', response.data]);
+                  this._route.navigate(['/refresh', response.data, 'product-data']);
                 }
               }
             );
