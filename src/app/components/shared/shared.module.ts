@@ -15,6 +15,8 @@ import { LinksComponent } from './links/links.component';
 import { ModalImageComponent } from './modal-form/modal-image.component';
 import { ImagesPipe } from '../../pipes/images.pipe';
 import { PushComponent } from './push/push.component';
+import { FormPaymentComponent } from './form-payment/form-payment.component';
+import { StaticHeaderComponent } from './header/static-header.component';
 
 @NgModule({
   imports: [
@@ -33,7 +35,9 @@ import { PushComponent } from './push/push.component';
     ModalFormComponent,
     ModalImageComponent,
     ImagesPipe,
-    PushComponent
+    PushComponent,
+    FormPaymentComponent,
+    StaticHeaderComponent
   ], exports: [
     HeaderComponent,
     FooterComponent,
@@ -44,7 +48,9 @@ import { PushComponent } from './push/push.component';
     ModalFormComponent,
     ModalImageComponent,
     ImagesPipe,
-    PushComponent
+    PushComponent,
+    FormPaymentComponent,
+    StaticHeaderComponent
   ]
 })
 export class SharedModule { }

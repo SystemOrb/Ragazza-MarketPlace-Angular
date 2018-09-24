@@ -1,4 +1,4 @@
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 /*
@@ -14,11 +14,9 @@ import { ProductAttributesComponent } from './admin/products/create-product/prod
 import { ProductDiscountComponent } from './admin/products/create-product/product-discount/product-discount.component';
 import { ProductSpecialComponent } from './admin/products/create-product/product-special/product-special.component';
 import { ProductImagesComponent } from './admin/products/create-product/product-images/product-images.component';
-import { PagesComponent } from './pages.component';
 import { SellersComponent } from './sellers/sellers.component';
 import { BalanceComponent } from './balance/balance.component';
 import { InvoiceComponent } from './admin/orders/invoice.component';
-import { VerifyLoginGuard } from '../../GUARDS/verify-login.guard';
 import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
 import { ProductAuthorGuard } from '../../GUARDS/product-author.guard';
 import { SearchProductComponent } from './admin/products/search-product/search-product.component';
@@ -27,9 +25,6 @@ import { RefreshComponent } from './refresh/refresh.component';
 
 
 const routes: Routes = [
-    /*{path: '', component: PagesComponent,
-    canActivate: [VerifyLoginGuard],
-     children: [*/
        {path: 'dashboard', component: DashboardComponent, data: {title: 'Panel de control'}},
        {path: 'profile', component: ProfileComponent, data: {title: 'Datos de la empresa'}},
        {path: 'orders', component: OrdersComponent, data: {title: 'Datos del pedido'}},
@@ -78,10 +73,7 @@ const routes: Routes = [
          component: ProductImagesComponent,
           data: {title: 'Imagenes del producto'}
         },
-      // ]},
-
     { path: '', pathMatch: 'full', redirectTo: '/profile' },
-
 ];
 
 @NgModule({

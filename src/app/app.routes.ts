@@ -5,7 +5,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { VerifyLoginGuard } from './GUARDS/verify-login.guard';
 import { CheckoutComponent } from './components/pages/payments/checkout/checkout.component';
-import { PayloadComponent } from './components/pages/payments/checkout/payload.component';
+import { ConfirmComponent } from './components/pages/payments/checkout/confirm.component';
 
 const routes: Routes = [
     { path: '',
@@ -15,9 +15,9 @@ const routes: Routes = [
     },
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
-    { path: 'checkout/:id', component: CheckoutComponent},
-    { path: 'payload', component: PayloadComponent},
+    {path: 'cart/checkout/:keyCustomer', component: CheckoutComponent, data: {title: 'Confirmar Compra'}},
+    {path: 'confirm', component: ConfirmComponent, data: {title: 'p2p'}},
     { path: '**', component: NotFoundComponent },
 ];
 
-export const APP_ROUTES = RouterModule.forRoot( routes, {useHash: true} );
+export const APP_ROUTES = RouterModule.forRoot( routes, {useHash: false} );

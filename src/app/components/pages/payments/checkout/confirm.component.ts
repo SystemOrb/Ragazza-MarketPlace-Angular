@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-payload',
-  templateUrl: './payload.component.html',
+  selector: 'app-confirm',
+  templateUrl: './confirm.component.html',
   styles: []
 })
-export class PayloadComponent implements OnInit {
+export class ConfirmComponent implements OnInit {
 
   constructor() { }
 

@@ -25,7 +25,8 @@ import { BalanceComponent } from './balance/balance.component';
 import { InvoiceComponent } from './admin/orders/invoice.component';
 import { FilterTableComponent } from './admin/products/create-product/product-attributes/filter-table.component';
 import { RefreshComponent } from './refresh/refresh.component';
-
+import {CardModule} from 'ngx-card/ngx-card';
+import { ConfirmComponent } from './payments/checkout/confirm.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -34,8 +35,9 @@ import { RefreshComponent } from './refresh/refresh.component';
     PagesRoutingModule,
     RouterModule,
     SharedModule,
-     FormsModule,
-     ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CardModule
   ],
   declarations: [
       DashboardComponent,
