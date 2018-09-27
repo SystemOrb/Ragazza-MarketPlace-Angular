@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PartialObserver } from 'rxjs';
 import { CartItems } from '../../../../models/products/cart.class';
 import { ProductData } from '../../../../models/products/product-data.class';
+import { HTTP_SERVICE } from '../../../../config/config';
 declare function init_plugins();
 declare function init_kushki();
 @Component({
@@ -13,8 +14,9 @@ declare function init_kushki();
 })
 export class CheckoutComponent implements OnInit {
   idcustomer: number;
-  cartItems: CartItems[] | any = [];
+  cartItems: CartItems[] | any = '';
   sumCart: number;
+  public URL: string = `${HTTP_SERVICE}/p2p/request.php`;
   constructor(private _kushki: KushiService, private _query: ActivatedRoute) {
     this._query.params.subscribe((param: PartialObserver<any> | any): void => {
       this.idcustomer = param['keyCustomer'];
@@ -23,12 +25,12 @@ export class CheckoutComponent implements OnInit {
 
   async ngOnInit() {
     init_plugins();
-    setTimeout(async () => {
-      init_kushki();
-    }, 1000);
     this.cartItems = await this.getCartItems();
     const cartOperation = await this.getCartSum();
     this.sumCart = Number(cartOperation);
+          setTimeout(async () => {
+            init_kushki();
+          }, 1000);
     console.log(this.cartItems);
   }
   getCartItems(): Promise <CartItems[] | boolean> {

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { KushkiToken } from '../../models/payment/token.class';
 import { KushkiCharge } from '../../models/payment/payload.class';
+import { InvoiceCheck } from '../../models/payment/invoice.class';
 
 @Injectable({
   providedIn: 'root'

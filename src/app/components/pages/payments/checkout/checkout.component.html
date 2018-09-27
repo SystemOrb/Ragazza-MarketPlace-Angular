@@ -43,11 +43,11 @@
                     </div>
                     <div class="col-md-8  order-md-8">
 
-                        <form id="kushki-pay-form" action="http://www.ragazzashop.com/ragazza_backend/api/routes/p2p/request.php" method="POST">
+                        <form method="POST" [action]="URL" id="kushki-pay-form">
                             <input type="hidden" name="cart_id" [value]="cartItems[0].cart_code">
                             <input type="hidden" id="totalAmount" name="totalAmount" [value]="sumCart">
-                            <input type="hidden" name="clothing" [value]="cartItems | json">
-                            <input type="hidden" value="20" name="amount">
+                            <input type="hidden" name="customer" [value]="idcustomer">
+                            <!--<input type="hidden" name="clothing" [value]="cartItems | json">-->
                         </form>
                     </div>
                 </div>

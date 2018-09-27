@@ -12,7 +12,7 @@ function init_kushki() {
                 currency: "USD"
             },
             currency: "USD",
-            payment_methods: ["credit-card", "transfer"],
+            payment_methods: ["credit-card"],
             is_subscription: false,
             inTestEnvironment: true
         });
