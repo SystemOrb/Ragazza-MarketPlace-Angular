@@ -1,8 +1,7 @@
 <style>
     * {
-        margin: 0px;
         overflow: hidden;
-        color: white
+        color: black
     }
 </style>
 <div id="main-wrapper">
@@ -41,13 +40,114 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-8  order-md-8">
+                    <!-- new customers -->
+                    <div *ngIf="displaySelect" class="col-md-8 order-md-1">
+                        <h4 class="mb-3">Direcciones guardadas</h4>
+                        <div class="row">
+                            <form class="form-material">
+                                <div class="col-md-12">
+                                    <select (change)="SetAddressDefault($event.target.value)" required class="form-control" name="addr_save">
+                                        <option selected disabled value="">-- Selecciona una dirección --</option>
+                                        <option *ngFor="let addr of CustomerAddress" [value]="addr.address_id">{{ addr.address_1 }} - {{addr.city}}</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-8 order-md-1">
+                        <h4 class="mb-3">Dirección de envío</h4>
+                        <form #billingForm="ngForm" class="needs-validation" novalidate="">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Nombre</label>
+                                    <input [(ngModel)]="firstname" type="text" name="firstname" class="form-control" id="firstName" placeholder="" value="" required="">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Apellido</label>
+                                    <input [(ngModel)]="lastname" type="text" name="lastname" class="form-control" id="lastName" placeholder="" value="" required="">
+                                </div>
+                            </div>
 
+                            <div class="mb-3">
+                                <label for="address">Dirección de envío</label>
+                                <input [(ngModel)]="address" type="text" name="payment_address" class="form-control" id="address" placeholder="1234 Calle St" required="">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address2">Dirección de envío 2 <span class="text-muted">(Opcional)</span></label>
+                                <input [(ngModel)]="address2" type="text" name="payment_address2" class="form-control" id="address2" placeholder="Apartamento | Calle">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone">Ciudad</label>
+                                    <input [(ngModel)]="city" type="text" name="shipping_city" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone">Teléfono</label>
+                                    <input [(ngModel)]="telephone" type="number" name="telephone" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="country">País</label>
+                                    <select (change)="changeRegion($event.target.value)" [(ngModel)]="country" required name="payment_country_id" class="custom-select d-block w-100" id="country" required="">
+                                <option [selected]="c.country_id == 62" *ngFor="let c of countries" [value]="c.country_id">{{c.name}}</option>
+                              </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">Estado | Provincia</label>
+                                    <select [(ngModel)]="state" name="payment_zone_id" class="custom-select d-block w-100" id="state" required="">
+                                        <option *ngFor="let r of region" [value]="r.zone_id">{{r.name}}</option>
+                              </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="zip">Código Postal | Zip</label>
+                                    <input [(ngModel)]="postcode" type="text" name="payment_postcode" class="form-control" id="zip" placeholder="" required="">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8  order-md-8">
                         <form method="POST" [action]="URL" id="kushki-pay-form">
                             <input type="hidden" name="cart_id" [value]="cartItems[0].cart_code">
                             <input type="hidden" id="totalAmount" name="totalAmount" [value]="sumCart">
                             <input type="hidden" name="customer" [value]="idcustomer">
-                            <!--<input type="hidden" name="clothing" [value]="cartItems | json">-->
+                            <input type="hidden" name="user_id" value="">
+                            <input type="hidden" name="customer_id" value="">
+                            <input type="hidden" name="customer_group_id" value="3">
+                            <input [(ngModel)]="firstname" type="hidden" name="firstname" value="">
+                            <input [(ngModel)]="lastname" type="hidden" name="lastname" value="">
+                            <input type="hidden" name="custom_field" [value]="cartItems | json">
+                            <input [(ngModel)]="firstname" type="hidden" name="payment_firstname" value="">
+                            <input [(ngModel)]="telephone" type="hidden" name="telephone" value="">
+                            <input [(ngModel)]="lastname" type="hidden" name="payment_lastname" value="">
+                            <input type="hidden" name="payment_company" value="">
+                            <input [(ngModel)]="address" type="hidden" name="payment_address_1" value="">
+                            <input [(ngModel)]="address2" type="hidden" name="payment_address_2" value="">
+                            <input [(ngModel)]="city" type="hidden" name="payment_city" value="">
+                            <input [(ngModel)]="postcode" type="hidden" name="payment_postcode" value="">
+                            <input [(ngModel)]="country" type="hidden" name="payment_country" value="">
+                            <input [(ngModel)]="country" type="hidden" name="payment_country_id" value="">
+                            <input [(ngModel)]="state" type="hidden" name="payment_zone" value="">
+                            <input [(ngModel)]="state" type="hidden" name="payment_zone_id" value="">
+                            <input type="hidden" name="payment_address_format" value="">
+                            <input type="hidden" name="payment_custom_field" value="">
+                            <input type="hidden" name="payment_method" value="Card">
+                            <input type="hidden" name="payment_code" [value]="cartItems[0].cart_code">
+                            <input [(ngModel)]="firstname" type="hidden" name="shipping_firstname" value="">
+                            <input [(ngModel)]="lastname" type="hidden" name="shipping_lastname" value="">
+                            <input [(ngModel)]="address" type="hidden" name="shipping_address_1" value="">
+                            <input [(ngModel)]="address2" type="hidden" name="shipping_address_2" value="">
+                            <input [(ngModel)]="city" type="hidden" name="shipping_city" value="">
+                            <input [(ngModel)]="postcode" type="hidden" name="shipping_postcode" value=" ">
+                            <input [(ngModel)]="country" type="hidden" name="shipping_country" value="">
+                            <input [(ngModel)]="country" type="hidden" name="shipping_country_id" value="">
+                            <input [(ngModel)]="state" type="hidden" name="shipping_zone" value="">
+                            <input [(ngModel)]="state" type="hidden" name="shipping_zone_id " value="">
+                            <input type="hidden" name="shipping_method " value="">
+                            <input type="hidden" name="total" [value]="sumCart">
+                            <input type="hidden" name="currency_id" value="2">
+                            <!--<input type="hidden " name="clothing " [value]="cartItems | json ">-->
                         </form>
                     </div>
                 </div>

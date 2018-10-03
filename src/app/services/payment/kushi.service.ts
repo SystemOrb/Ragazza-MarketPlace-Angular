@@ -75,4 +75,55 @@ export class KushiService {
       }),
     );
   }
+  // Datos de la empresa que publico el producto
+  BussinessShop(shop_id: number, operationType?: string) {
+    const url = `${HTTP_SERVICE}/login.php?rgza_shop=${shop_id}&operationType=${operationType}`;
+    return this._http.get(url).pipe(
+      map( (response: any)  => {
+        return response;
+      }),
+      catchError( (err: Observable<string | Boolean>) => {
+        console.log(err);
+        return new Observable<string | boolean>();
+      }),
+    );
+  }
+  // Buscamos el address guardada del usuario
+  CustomerAddress(keyUser: number, operationType?: string) {
+    const url = `${HTTP_SERVICE}/address.php?customer_id=${keyUser}&operationType=${operationType}`;
+    return this._http.get(url).pipe(
+      map( (response: any)  => {
+        return response;
+      }),
+      catchError( (err: Observable<string | Boolean>) => {
+        console.log(err);
+        return new Observable<string | boolean>();
+      }),
+    );
+  }
+    // Buscamos los paises disponibles
+    Countries(operationType: string) {
+      const url = `${HTTP_SERVICE}/address.php?operationType=${operationType}`;
+      return this._http.get(url).pipe(
+        map( (response: any)  => {
+          return response;
+        }),
+        catchError( (err: Observable<string | Boolean>) => {
+          console.log(err);
+          return new Observable<string | boolean>();
+        }),
+      );
+    }
+    Region(region: number | string, operationType: string) {
+      const url = `${HTTP_SERVICE}/address.php?operationType=${operationType}&country_id=${region}`;
+      return this._http.get(url).pipe(
+        map( (response: any)  => {
+          return response;
+        }),
+        catchError( (err: Observable<string | Boolean>) => {
+          console.log(err);
+          return new Observable<string | boolean>();
+        }),
+      );
+    }
 }
