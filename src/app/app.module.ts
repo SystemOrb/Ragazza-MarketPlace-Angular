@@ -20,6 +20,9 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
 import { CheckoutComponent } from './components/pages/payments/checkout/checkout.component';
 import {CardModule} from 'ngx-card/ngx-card';
 import { ConfirmComponent } from './components/pages/payments/checkout/confirm.component';
+import { InvoicePublicComponent } from './components/pages/public/invoice/invoice.component';
+import { PaymentFailureComponent } from './components/pages/public/confirmation/payment-failure/payment-failure.component';
+import { PaymentSuccessComponent } from './components/pages/public/confirmation/payment-success/payment-success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,10 @@ import { ConfirmComponent } from './components/pages/payments/checkout/confirm.c
     RegisterComponent,
     CheckoutComponent,
     NotFoundComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    InvoicePublicComponent,
+    PaymentFailureComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     BrowserModule,

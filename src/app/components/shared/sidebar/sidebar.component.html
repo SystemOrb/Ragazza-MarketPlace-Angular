@@ -20,11 +20,9 @@
                         <span class="label label-rouded label-themecolor pull-right">4</span>
                         </span>
                     </a>
-                    <ul aria-expanded="false" class="collapse">
+                    <ul aria-expanded="false" class="collapse in">
                         <li><a [routerLink]="['/profile']">Perfil </a></li>
-                        <li><a>Configuración</a></li>
-                        <li><a [routerLink]="['/balance']">Balance</a></li>
-                        <li><a>Cerrar sesión</a></li>
+                        <li><a (click)="_user.logout()">Cerrar sesión</a></li>
                     </ul>
                 </li>
                 <li>
@@ -35,10 +33,9 @@
                             <span class="label label-rouded label-themecolor pull-right">4</span>
                         </span>
                     </a>
-                    <ul aria-expanded="false" class="collapse">
+                    <ul aria-expanded="true" class="collapse in">
                         <li><a [routerLink]="['/products']">Productos </a></li>
                         <li><a [routerLink]="['/orders']">Pedidos</a></li>
-                        <li><a [routerLink]="['/sellers']">Historial de ventas</a></li>
                     </ul>
                 </li>
             </ul>

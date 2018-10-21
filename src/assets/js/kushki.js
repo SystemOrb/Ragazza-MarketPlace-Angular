@@ -12,6 +12,7 @@ function init_kushki() {
                 currency: "USD"
             },
             currency: "USD",
+            isDeferred: false,
             payment_methods: ["credit-card"],
             is_subscription: false,
             inTestEnvironment: true

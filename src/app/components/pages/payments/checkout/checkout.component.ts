@@ -26,6 +26,7 @@ export class CheckoutComponent implements OnInit {
   public URL: string = `${HTTP_SERVICE}/p2p/request.php`;
   public countries: Country[] | any = '';
   public region: any = '';
+  public email: string = '';
 
 // autocompleter
   firstname: string;
@@ -37,13 +38,16 @@ export class CheckoutComponent implements OnInit {
   postcode: string;
   city: string;
   telephone: string;
-
   constructor(private _kushki: KushiService, private _query: ActivatedRoute) {
     this._query.params.subscribe((param: PartialObserver<any> | any): void => {
       if (param['keyCustomer'] === 'nuevo') {
-        window.location.href = 'http://www.ragazzashop.com/login.php';
+         window.location.href = 'http://www.ragazzashop.com/login.php';
+         return;
       }
        this.idcustomer = param['keyCustomer'];
+    });
+    this._query.queryParams.subscribe((optional: PartialObserver<any> | any): void => {
+      this.email = optional['email'];
     });
   }
 
@@ -51,13 +55,14 @@ export class CheckoutComponent implements OnInit {
     init_plugins();
     this.cartItems = await this.getCartItems();
     const cartOperation = await this.getCartSum();
+    this.countries = await this.GetAllCountries();
     this.sumCart = Number(cartOperation);
           setTimeout(async () => {
             init_kushki();
           }, 1000);
     this.CustomerAddress = await this.getCustomerAddress();
-    this.countries = await this.GetAllCountries();
     this.region = await this.getZones(62);
+    console.log(this.countries);
   }
   getCartItems(): Promise <CartItems[] | boolean> {
     return new Promise((resolve, reject) => {

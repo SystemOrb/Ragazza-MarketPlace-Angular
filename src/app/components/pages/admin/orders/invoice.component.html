@@ -1,29 +1,37 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card card-body printableArea">
-            <h3><b>INVOICE</b> <span class="pull-right">#5669626</span></h3>
+            <h3><b>PEDIDO</b> <span class="pull-right">{{objectInvoice.invoice_prefix}}&nbsp;{{objectInvoice.invoice_no}}</span></h3>
             <hr>
+            <div style="display: none" class="hide">
+                <form>
+                    <fieldset>
+                        <span [innerText]="objectInvoice.payment_country | location:'getCountry':'country'"></span>
+                        <span [innerText]="objectInvoice.payment_zone | location:'getState':'region'"></span>
+                    </fieldset>
+                </form>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left">
                         <address>
-                            <h3> &nbsp;<b class="text-danger">Material Pro Admin</b></h3>
-                            <p class="text-muted m-l-5">E 104, Dharti-2,
-                                <br> Nr' Viswakarma Temple,
-                                <br> Talaja Road,
-                                <br> Bhavnagar - 364002</p>
+                            <h3> &nbsp;<b class="text-danger">{{_auth.userShop.shop_name}}</b></h3>
+                            <p class="text-muted m-l-5"><strong>DATOS DEL COMERCIO</strong>
+                                <br>{{_auth.userShop.shop_email}}
+                                <br>{{_auth.userShop.shop_address}}
+                                <br>{{_auth.userShop.shop_phone}}</p>
                         </address>
                     </div>
                     <div class="pull-right text-right">
                         <address>
-                            <h3>To,</h3>
-                            <h4 class="font-bold">Gaala &amp; Sons,</h4>
-                            <p class="text-muted m-l-30">E 104, Dharti-2,
-                                <br> Nr' Viswakarma Temple,
-                                <br> Talaja Road,
-                                <br> Bhavnagar - 364002</p>
-                            <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> 23rd Jan 2017</p>
-                            <p><b>Due Date :</b> <i class="fa fa-calendar"></i> 25th Jan 2017</p>
+                            <h3>Para,</h3>
+                            <h4 class="font-bold">{{objectInvoice.payment_firstname}}&nbsp;{{objectInvoice.payment_lastname}}</h4>
+                            <p class="text-muted m-l-30">{{objectInvoice.payment_address_1}},
+                                <br> <span [innerText]="_order.country"></span>,
+                                <br> <span [innerText]="_order.region"></span> - {{objectInvoice.payment_city}},
+                                <br> Teléfono: {{ objectInvoice.fax }} {{objectInvoice.payment_company}}</p>
+                            <p class="m-t-30"><b>Pago realizado el:</b>&nbsp;<i class="fa fa-calendar"></i> {{objectInvoice.date_added | date}}
+                            </p>
                         </address>
                     </div>
                 </div>
@@ -32,58 +40,72 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Description</th>
-                                    <th class="text-right">Quantity</th>
-                                    <th class="text-right">Unit Cost</th>
+                                    <th class="text-center"></th>
+                                    <th>Artículo</th>
+                                    <th class="text-right">Cantidad</th>
+                                    <th class="text-right">Costo Unitario</th>
                                     <th class="text-right">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Milk Powder</td>
-                                    <td class="text-right">2 </td>
-                                    <td class="text-right"> $24 </td>
-                                    <td class="text-right"> $48 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">2</td>
-                                    <td>Air Conditioner</td>
-                                    <td class="text-right"> 3 </td>
-                                    <td class="text-right"> $500 </td>
-                                    <td class="text-right"> $1500 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">3</td>
-                                    <td>RC Cars</td>
-                                    <td class="text-right"> 20 </td>
-                                    <td class="text-right"> %600 </td>
-                                    <td class="text-right"> $12000 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">4</td>
-                                    <td>Down Coat</td>
-                                    <td class="text-right"> 60 </td>
-                                    <td class="text-right">$5 </td>
-                                    <td class="text-right"> $300 </td>
+                                    <td class="text-center">
+                                        <img width="80" class="img-thumbnail img-circle" [src]="productInfo.image | images" [alt]="productInfo.model">
+                                    </td>
+                                    <td>{{description.name}}</td>
+                                    <td class="text-right">1</td>
+                                    <td class="text-right">${{productInfo.price | number}} </td>
+                                    <td class="text-right">${{tax}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="pull-right m-t-30 text-right">
-                        <p>Sub - Total amount: $13,848</p>
-                        <p>vat (10%) : $138 </p>
-                        <hr>
-                        <h3><b>Total :</b> $13,986</h3>
-                    </div>
-                    <div class="clearfix"></div>
-                    <hr>
-                    <div class="text-right">
-                        <button class="btn btn-danger" type="submit"> Proceed to payment </button>
-                        <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                <div class="space-20"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    Envío del Pedido
+                                </h3>
+                                <h5 style="font-weight: bold" class="card-subtitle mb-2 text-warning">
+                                    Utiliza este formulario para actualizar el estado del pedido del cliente
+                                </h5>
+                                <strong>Dirección del cliente:</strong>
+                                <address>
+                                        <p class="text-muted m-l-30 text-dark">{{objectInvoice.payment_address_1}},
+                                            <br><span [innerText]="_order.country"></span> -
+                                             <span [innerText]="_order.region"></span> - <span>{{objectInvoice.payment_city}}</span>,
+                                            <br> Teléfono: {{ objectInvoice.fax }} {{objectInvoice.payment_company}}</p>
+                                    </address>
+                                <form method="POST" ngNativeValidate #shipping="ngForm" (ngSubmit)="updateShipping(shipping)">
+                                    <div class="form-group">
+                                        <label for="select">Actualizar Status del pedido</label>
+                                        <select [(ngModel)]="shipping_status" name="shipping_status" [disabled]="objectInvoice.order_status_id === 5" required class="form-control">
+                                                <option selected disabled value="">-- Selecciona un estado del pedido --</option>
+                                                <option  [selected]="objectInvoice.order_status_id === s.order_status_id" *ngFor="let s of shipMethods" [value]="s.order_status_id">
+                                                    {{s.name}}
+                                                </option>
+                                        </select>
+                                        <fieldset style="display: none">
+                                            <input type="hidden" [(ngModel)]="description.name" name="product_name" [value]="description.name">
+                                            <input type="hidden" [(ngModel)]="_auth.userShop.shop_name" name="comerce" [value]="_auth.userShop.shop_name">
+                                            <input type="hidden" [(ngModel)]="_auth.userShop.shop_phone" name="comerce_fax" [value]="_auth.userShop.shop_phone">
+                                            <input type="hidden" [(ngModel)]="_auth.userShop.shop_email" name="comerce_mail" value="_auth.userShop.shop_email">
+                                            <input type="hidden" [(ngModel)]="objectInvoice.customer_id" name="customer_id" [value]="objectInvoice.customer_id">
+                                            <input type="hidden" [(ngModel)]="objectInvoice.payment_firstname" name="firstname" [value]="objectInvoice.payment_firstname">
+                                            <input type="hidden" [(ngModel)]="shipping_status" name="comerce_status">
+                                        </fieldset>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-sm btn-success" type="submit">
+                                            Configurar pedido
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

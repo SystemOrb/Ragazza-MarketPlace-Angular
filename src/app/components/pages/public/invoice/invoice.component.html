@@ -1,0 +1,82 @@
+<style>
+    * {
+        overflow: hidden;
+        margin: 0;
+    }
+</style>
+<div id="main-wrapper">
+    <app-static-header></app-static-header>
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-body printableArea">
+                        <h3><b>PEDIDO</b> <span class="pull-right">{{objectInvoice.invoice_prefix}}&nbsp;{{objectInvoice.invoice_no}}</span></h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left">
+                                    <address>
+                                                <h3> &nbsp;<b class="text-danger">{{storeDetails.shop_name}}</b></h3>
+                                                <p class="text-muted m-l-5"><strong>DATOS DEL COMERCIO</strong>
+                                                    <br>{{storeDetails.shop_email}}
+                                                    <br>{{storeDetails.shop_address}}
+                                                    <br>{{storeDetails.shop_phone}}</p>
+                                            </address>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <address>
+                                                <h3>Para,</h3>
+                                                <h4 class="font-bold">{{objectInvoice.payment_firstname}}&nbsp;{{objectInvoice.payment_lastname}}</h4>
+                                                <p class="text-muted m-l-30">{{objectInvoice.payment_address_1}},
+                                                    <br> {{objectInvoice.payment_country}},
+                                                    <br> {{objectInvoice.payment_zone}} - {{objectInvoice.payment_city}},
+                                                    <br> Teléfono: {{ objectInvoice.fax }} {{objectInvoice.payment_company}}</p>
+                                                <p class="m-t-30"><b>Pago realizado el:</b>&nbsp;<i class="fa fa-calendar"></i> {{objectInvoice.date_added | date}}</p>
+                                            </address>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-responsive m-t-40" style="clear: both;">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center"></th>
+                                                <th>Artículo</th>
+                                                <th class="text-right">Cantidad</th>
+                                                <th class="text-right">Costo Unitario</th>
+                                                <th class="text-right">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <img width="80" class="img-thumbnail img-circle" [src]="productInfo.image | images" [alt]="productInfo.model">
+                                                </td>
+                                                <td>{{description.name}}</td>
+                                                <td class="text-right">1</td>
+                                                <td class="text-right">${{productInfo.price | number}} </td>
+                                                <td class="text-right">${{tax}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="pull-right m-t-30 text-right">
+                                    <p>Monto unitario: ${{productInfo.price | number}}</p>
+                                    <p>Impuestos: ${{objectInvoice.commission}} </p>
+                                    <hr>
+                                    <h3><b>Total :</b> ${{tax}}</h3>
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>

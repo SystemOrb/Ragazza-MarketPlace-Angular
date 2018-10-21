@@ -109,10 +109,10 @@
                     </div>
                     <div class="col-md-8  order-md-8">
                         <form method="POST" [action]="URL" id="kushki-pay-form">
-                            <input type="hidden" name="cart_id" [value]="cartItems[0].cart_code">
+                            <input type="hidden" name="cart_id" value="">
                             <input type="hidden" id="totalAmount" name="totalAmount" [value]="sumCart">
                             <input type="hidden" name="customer" [value]="idcustomer">
-                            <input type="hidden" name="user_id" value="">
+                            <input type="hidden" name="user_id" [value]="idcustomer">
                             <input type="hidden" name="customer_id" value="">
                             <input type="hidden" name="customer_group_id" value="3">
                             <input [(ngModel)]="firstname" type="hidden" name="firstname" value="">
@@ -144,7 +144,8 @@
                             <input [(ngModel)]="country" type="hidden" name="shipping_country_id" value="">
                             <input [(ngModel)]="state" type="hidden" name="shipping_zone" value="">
                             <input [(ngModel)]="state" type="hidden" name="shipping_zone_id " value="">
-                            <input type="hidden" name="shipping_method " value="">
+                            <input [(ngModel)]="email" type="hidden" name="payer_email" [value]="email">
+                            <input type="hidden" name="shipping_method " value="none">
                             <input type="hidden" name="total" [value]="sumCart">
                             <input type="hidden" name="currency_id" value="2">
                             <!--<input type="hidden " name="clothing " [value]="cartItems | json ">-->

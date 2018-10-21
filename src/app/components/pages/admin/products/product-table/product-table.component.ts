@@ -5,6 +5,7 @@ import { ProductsTable } from '../../../../../models/products/product-table.clas
 import { PHOTO_SERVICES } from '../../../../../config/config';
 import { ProductData } from '../../../../../models/products/product-data.class';
 import { Router } from '@angular/router';
+import { WalletService } from '../../../../../services/payment/wallet.service';
 declare const swal: any;
 @Component({
   selector: 'app-product-table',
@@ -17,7 +18,8 @@ export class ProductTableComponent implements OnInit {
   itemsPosted: number = 0;
   itemsSells: number = 0;
   constructor(private _product: ProductService,
-     private _user: AuthService, private _route: Router) { }
+     private _user: AuthService, private _route: Router,
+     public _wallet: WalletService) { }
 
   ngOnInit() {
     // this.getAllProducts();

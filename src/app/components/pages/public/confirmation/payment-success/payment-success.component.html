@@ -1,0 +1,19 @@
+<section id="wrapper" class="error-page">
+    <div class="error-box">
+        <div class="error-body text-center">
+            <h1 *ngIf="status" style="font-size: 70px" class="text-light">Tu pago ha sido procesado</h1>
+            <h1 *ngIf="!status" style="font-size: 70px" class="text-light">Tu pago ha sido rechazado</h1>
+            <h3 *ngIf="ticket !== 0" class="text-uppercase text-light">Número de Ticket: {{ ticket }}</h3>
+            <h3 *ngIf="!status && message !== ''" class="text-uppercase text-light">{{message}}</h3>
+            <p *ngIf="status" class=" m-t-30 m-b-30 text-light">Revisa tus pedidos</p>
+            <p *ngIf="!status" class=" m-t-30 m-b-30 text-light">Inténtalo más tarde!</p>
+            <a *ngIf="status" href="http://www.ragazzashop.com/orders.php" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">
+              Mi cuenta
+            </a>
+            <a *ngIf="!status" href="http://www.ragazzashop.com" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">
+              Regresar a la tienda
+            </a>
+        </div>
+        <footer class="footer text-center">© Ragazza Shop.</footer>
+    </div>
+</section>

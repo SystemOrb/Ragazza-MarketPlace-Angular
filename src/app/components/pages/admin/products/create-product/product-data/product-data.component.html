@@ -25,7 +25,7 @@
                                              <span class="fileinput-new">Selecciona una imagen</span>
                                     <input type="hidden">
                                     <input type="hidden">
-                                    <input (change)="changePicture($event.target.files[0])" type="file" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Formato: GIF | JPG | PNG |JPEG. 2MB max" formControlName="image" name="image">
+                                    <input required (change)="changePicture($event.target.files[0])" type="file" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Formato: GIF | JPG | PNG |JPEG. 2MB max" formControlName="image" name="image">
                                     </span>
                                 </div>
                             </div>
@@ -43,6 +43,13 @@
                     <div class="form-group">
                         <code>*</code><label>Stock de artículos<span class="help"></span></label>
                         <input formControlName="quantity" required type="number" class="form-control form-control-line">
+                    </div>
+                    <div class="form-group">
+                        <label>Estado del artículo:<code><small></small></code></label>
+                        <select required formControlName="status" class="form-control">
+                                <option  value="1">Disponible</option>
+                                <option value="1">Desactivado</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Dimensiones del artículo</label><code><small>(Opcional)</small></code>
@@ -80,13 +87,7 @@
                                     </option>
                                 </select>
                     </div>
-                    <div class="form-group">
-                        <label>Estado del artículo:<code><small>(Opcional)</small></code></label>
-                        <select formControlName="status" class="form-control">
-                                <option selected value="1">Disponible</option>
-                                <option value="1">Desactivado</option>
-                        </select>
-                    </div>
+
                     <h4>Códigos del producto<code><small>(Opcional)</small></code></h4>
                     <hr>
                     <div class="form-group">

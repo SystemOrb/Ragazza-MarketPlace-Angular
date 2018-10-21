@@ -17,6 +17,7 @@ import { ImagesPipe } from '../../pipes/images.pipe';
 import { PushComponent } from './push/push.component';
 import { FormPaymentComponent } from './form-payment/form-payment.component';
 import { StaticHeaderComponent } from './header/static-header.component';
+import { LocationPipe } from '../../pipes/location.pipe';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { StaticHeaderComponent } from './header/static-header.component';
     ModalFormComponent,
     ModalImageComponent,
     ImagesPipe,
+    LocationPipe,
     PushComponent,
     FormPaymentComponent,
     StaticHeaderComponent
@@ -48,6 +50,7 @@ import { StaticHeaderComponent } from './header/static-header.component';
     ModalFormComponent,
     ModalImageComponent,
     ImagesPipe,
+    LocationPipe,
     PushComponent,
     FormPaymentComponent,
     StaticHeaderComponent

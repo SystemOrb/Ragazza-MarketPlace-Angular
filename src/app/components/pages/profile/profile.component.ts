@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserShop } from '../../../models/empresas.class';
 import { NgForm } from '@angular/forms';
+import { WalletService } from '../../../services/payment/wallet.service';
+import { PartialObserver } from 'rxjs';
 declare const swal: any;
 @Component({
   selector: 'app-profile',
@@ -27,15 +29,19 @@ export class ProfileComponent implements OnInit {
    */
   objectSend: UserShop;
   buttonSend = false;
-  constructor(private _user: AuthService) {
+  constructor(private _user: AuthService, private _wallet: WalletService) {
    }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.profile = this._user.userShop;
     this.shop_name = this.profile.shop_name;
     this.shop_address = this.profile.shop_address;
     this.shop_phone = this.profile.shop_phone;
     this.user_id = this.profile.shop_id;
+    const balance  = await this.wallet();
+    const sells = await this.Sellers();
+    this._wallet.balance = Number(balance);
+    this._wallet.sells = Number(sells);
   }
   updateProfile(form: NgForm) {
     const updateProfile = new UserShop(null,
@@ -88,4 +94,23 @@ export class ProfileComponent implements OnInit {
       }
     });
    }
+   wallet() {
+    return new Promise((resolve, reject) => {
+      this._wallet.getWalletData(this.user_id, 'sumBalance').subscribe(
+        (walletShop: PartialObserver<any> | any): void => {
+          console.log(walletShop);
+           resolve(walletShop.total);
+        }
+      );
+    });
+   }
+   Sellers(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this._wallet.getWalletData(this.user_id, 'ShopSellQty').subscribe(
+        (sell: PartialObserver<any> | any): void => {
+           resolve(sell.total);
+        }
+      );
+    });
+  }
 }

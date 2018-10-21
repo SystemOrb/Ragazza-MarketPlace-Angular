@@ -9,6 +9,9 @@ import { AuthorService } from './products/author.service';
 import { SearchService } from './products/search.service';
 // import { PlacetopayService } from './payment/placetopay.service';
 import { PushService } from './notifications/push.service';
+import { OrdersService } from './payment/orders.service';
+import { WalletService } from './payment/wallet.service';
+import { ShipService } from './payment/ship.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,8 +24,10 @@ import { PushService } from './notifications/push.service';
     ModalService,
     AuthorService,
     SearchService,
-    // PlacetopayService,
-    PushService
+    PushService,
+    OrdersService,
+    WalletService,
+    ShipService
   ]
 })
 export class ServicesModule { }
